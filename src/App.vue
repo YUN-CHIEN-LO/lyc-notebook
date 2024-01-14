@@ -1,5 +1,9 @@
 <template>
   <div>
+    <input v-model="account" />
+    <input v-model="password" />
+    <button @click="handleLogin">login</button>
+    <button @click="handleSignout">sign out</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
@@ -11,12 +15,45 @@
 </template>
 
 <script setup lang="ts">
+import { loginUser, signOutUser } from "./plugins/firebase";
+import { ref } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 
-import { useFirestore } from "vuefire";
-const db = useFirestore();
+// import { useFirestore } from "vuefire";
+// const db = useFirestore();
 
-console.log(db);
+const account = ref("");
+const password = ref("");
+function handleSignout() {
+  signOutUser();
+}
+async function handleLogin() {
+  try {
+    const { user } = (await loginUser(
+      account.value,
+      password.value
+    )) as FirebaseUserCredential;
+    console.log("login", user);
+  } catch (error) {
+    console.warn(error);
+  }
+
+  // createUser(account.value, password.value)
+  //   .then((userCredential: FirebaseUserCredential) => {
+  //     // Signed up
+  //     const user = userCredential.user as FirebaseUser;
+  //     console.log(user);
+  //     // ...
+  //   })
+  //   .catch((error: FirebaseError) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     console.log(errorCode, errorMessage);
+  //     // ..
+  //   });
+}
+
+// console.log(db);
 </script>
 
 <style scoped>

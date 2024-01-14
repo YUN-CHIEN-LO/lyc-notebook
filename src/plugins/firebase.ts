@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
-// ... other firebase imports
+import {
+  getAuth,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export const firebaseApp = initializeApp({
   apiKey: "AIzaSyDOOWVzDNPmIV1BI9KiJU4y6RVMAlBt4Is",
@@ -14,6 +20,33 @@ export const firebaseApp = initializeApp({
 
 // used for the firestore refs
 const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 // here we can export reusable database references
 export const todosRef = collection(db, "todos");
+
+export function createUser(
+  email: string,
+  password: string
+): Promise<FirebaseUserCredential> {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+onAuthStateChanged(auth, (user: FirebaseUser) => {
+  if (user) {
+    console.log("ooo", user);
+  } else {
+    console.log("xxx");
+  }
+});
+
+export function loginUser(
+  email: string,
+  password: string
+): Promise<FirebaseUserCredential> {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function signOutUser() {
+  return signOut(auth);
+}
