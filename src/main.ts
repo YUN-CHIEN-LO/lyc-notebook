@@ -1,20 +1,21 @@
-import { createApp } from "vue";
-import "./style.css";
-import App from "./App.vue";
-
-import { VueFire, VueFireAuth } from "vuefire";
-
-// the file we created above with `database`, `firestore` and other exports
-import { firebaseApp } from "./plugins/firebase";
+import { createApp } from 'vue';
+import { VueFire, VueFireAuth } from 'vuefire';
+import router from '@/router';
+import pinia from '@/plugins/pinia';
+import i18n from '@/plugins/i18n';
+import { firebaseApp } from '@/plugins/firebase';
+import App from '@/App.vue';
+import "@/styles/_lycui.scss"
 
 const app = createApp(App);
 app.use(VueFire, {
-  // imported above but could also just be created here
   firebaseApp,
   modules: [
-    // we will see other modules later on
     VueFireAuth(),
   ],
 });
+app.use(router);
+app.use(pinia);
+app.use(i18n);
 
-app.mount("#app");
+app.mount('#app');

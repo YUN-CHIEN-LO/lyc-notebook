@@ -1,0 +1,188 @@
+@import "./function";
+
+@for $i from 0 through 20 {
+  .ma-s-#{$i} {
+    margin: s-unit($i);
+  }
+  .ma-g-#{$i} {
+    margin: g-unit($i);
+  }
+  .ml-s-#{$i} {
+    margin-left: s-unit($i);
+  }
+  .ml-g-#{$i} {
+    margin-left: g-unit($i);
+  }
+  .mr-s-#{$i} {
+    margin-right: s-unit($i);
+  }
+  .mr-g-#{$i} {
+    margin-right: g-unit($i);
+  }
+  .mt-s-#{$i} {
+    margin-top: s-unit($i);
+  }
+  .mt-g-#{$i} {
+    margin-top: g-unit($i);
+  }
+  .mb-s-#{$i} {
+    margin-bottom: s-unit($i);
+  }
+  .mb-g-#{$i} {
+    margin-bottom: g-unit($i);
+  }
+  .mx-s-#{$i} {
+    margin-left: s-unit($i);
+    margin-right: s-unit($i);
+  }
+  .mx-g-#{$i} {
+    margin-left: g-unit($i);
+    margin-right: g-unit($i);
+  }
+  .my-s-#{$i} {
+    margin-top: s-unit($i);
+    margin-bottom: s-unit($i);
+  }
+  .my-g-#{$i} {
+    margin-top: g-unit($i);
+    margin-bottom: g-unit($i);
+  }
+  .pa-g-#{$i} {
+    padding: g-unit($i);
+  }
+  .pa-s-#{$i} {
+    padding: s-unit($i);
+  }
+  .pl-g-#{$i} {
+    padding-left: g-unit($i);
+  }
+  .pl-s-#{$i} {
+    padding-left: s-unit($i);
+  }
+  .pr-g-#{$i} {
+    padding-right: g-unit($i);
+  }
+  .pr-s-#{$i} {
+    padding-right: s-unit($i);
+  }
+  .pt-g-#{$i} {
+    padding-top: g-unit($i);
+  }
+  .pt-s-#{$i} {
+    padding-top: s-unit($i);
+  }
+  .pb-g-#{$i} {
+    padding-bottom: g-unit($i);
+  }
+  .pb-s-#{$i} {
+    padding-bottom: s-unit($i);
+  }
+  .px-g-#{$i} {
+    padding-left: g-unit($i);
+    padding-right: g-unit($i);
+  }
+  .px-s-#{$i} {
+    padding-left: s-unit($i);
+    padding-right: s-unit($i);
+  }
+  .py-g-#{$i} {
+    padding-top: g-unit($i);
+    padding-bottom: g-unit($i);
+  }
+  .py-s-#{$i} {
+    padding-top: s-unit($i);
+    padding-bottom: s-unit($i);
+  }
+  .br-#{$i} {
+    border-radius: s-unit($i);
+  }
+
+  .fz-#{$i} {
+    font-size: fz($i);
+  }
+
+  .t-s-#{$i} {
+    top: s-unit($i);
+  }
+  .t-g-#{$i} {
+    top: g-unit($i);
+  }
+  .b-s-#{$i} {
+    bottom: s-unit($i);
+  }
+  .b-g-#{$i} {
+    bottom: g-unit($i);
+  }
+  .l-s-#{$i} {
+    left: s-unit($i);
+  }
+  .l-g-#{$i} {
+    left: g-unit($i);
+  }
+  .r-s-#{$i} {
+    right: s-unit($i);
+  }
+  .r-g-#{$i} {
+    right: g-unit($i);
+  }
+
+  .lh-#{$i} {
+    line-height: lf($i);
+  }
+}
+.t-c {
+  top: 50%;
+}
+.b-c {
+  bottom: 50%;
+}
+.l-c {
+  left: 50%;
+}
+.r-c {
+  right: 50%;
+}
+.tyc {
+  transform: translateY(-50%);
+}
+.txc {
+  transform: translateX(-50%);
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.poa {
+  position: absolute;
+}
+.por {
+  position: relative;
+}
+.tac {
+  text-align: center;
+}
+.tal {
+  text-align: left;
+}
+.w-100 {
+  width: 100%;
+}
+
+@each $name
+  in ("primary", "secondary", "backdrop", "text", "dark", "light", "alert")
+{
+  @for $i from 1 through 9 {
+    .c-#{$name}-#{$i} {
+      color: color($name, $i);
+    }
+  }
+  .c-#{$name} {
+    color: color($name);
+  }
+}

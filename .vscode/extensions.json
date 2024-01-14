@@ -1,3 +1,14 @@
 {
-  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+  "recommendations": [
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "dbaeumer.vscode-eslint",
+    "christian-kohler.path-intellisense",
+    "mrmlnc.vscode-scss",
+    "DavidAnson.vscode-markdownlint",
+    "yzhang.markdown-all-in-one",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "donjayamanne.githistory"
+  ]
 }

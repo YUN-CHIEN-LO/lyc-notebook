@@ -1,0 +1,66 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#lyc-app {
+  background-color: color(backdrop);
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  font-size: $font-size;
+  color: color(dark);
+  line-height: 1.5;
+  letter-spacing: 1px;
+  @include flex($fd: column, $fw: nowrap, $ai: stretch);
+
+  input:focus,
+  textarea:focus,
+  select:focus,
+  a:focus {
+    outline: none;
+    -webkit-text-fill-color: var(--dark);
+    box-shadow: inset 0 0 0 1000px var(--white);
+  }
+
+  .lyc-tooltip {
+    position: fixed;
+    color: $color-font-inverse;
+    background-color: color(dark, 3);
+    border-radius: s-unit(1);
+    font-size: fz(3);
+    opacity: 0;
+    visibility: hidden;
+    padding: s-unit(0.5) s-unit(2);
+    margin: s-unit(1);
+    text-align: center;
+    transform: translateX(-50%);
+    @include transitions(opacity 0.1s linear);
+    @include utils-user-select(none);
+
+    &--hover {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .lyc-container {
+    flex: 1;
+    overflow: auto;
+    @include small-device {
+      padding: s-unit(2) s-unit(2);
+    }
+
+    @include medium-device {
+      padding: s-unit(2) s-unit(10);
+    }
+
+    @include large-device {
+      padding: s-unit(2) s-unit(10);
+    }
+  }
+}
