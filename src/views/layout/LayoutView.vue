@@ -38,7 +38,16 @@
         />
 
         <!-- 更多資訊 -->
+        <LycAvatar
+          v-if="userStore.getIsLogin"
+          class="ml-g-1"
+          v-lyc-tooltip="$t('system.moreInfo')"
+          :url="userStore.user.photoURL"
+          :alt="userStore.user.displayName"
+          @click="handleMoreDrawer"
+        />
         <LycIconButton
+          v-else
           v-lyc-tooltip="$t('system.moreInfo')"
           icon="mdiMenu"
           @click="handleMoreDrawer"
@@ -50,63 +59,32 @@
       <router-view></router-view>
     </main>
 
-    <lyc-drawer v-model="showMoreDrawer">
-      <!-- 切換語系 -->
-      <lyc-button
-        vertical
-        prefix-icon="mdiTranslate"
-        class="w-100 tal"
-        @click="handleToggleLang"
-      >
-        {{ $t(`lang.${layoutStore.getLang}`) }}
-      </lyc-button>
-      <!-- 切換主題 -->
-      <lyc-button
-        vertical
-        prefix-icon="mdiThemeLightDark"
-        class="w-100 tal"
-        @click="handleToggleTheme"
-      >
-        {{ $t(`system.${layoutStore.getTheme}`) }}
-      </lyc-button>
+    <LayoutDrawer />
 
-      <!-- 登出使用者 -->
-      <lyc-button
-        vertical
-        v-if="userStore.getIsLogin"
-        prefix-icon="mdiLogout"
-        class="w-100 tal"
-        @click.prevent="handleLogout"
-      >
-        {{ $t('loginView.logout') }}
-      </lyc-button>
-
-      <!-- 登入使用者 -->
-      <lyc-button
-        vertical
-        v-if="showLogin"
-        class="w-100 tal"
-        prefix-icon="mdiLogin"
-        @click.prevent="handleLogin"
-      >
-        {{ $t('loginView.login') }}
-      </lyc-button>
-    </lyc-drawer>
+    <LycAlert v-model="layoutStore.systemAlert" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { LycNavbar, LycDrawer } from '@/components/layout';
-import { LycIconButton, LycButton } from '@/components/basic';
-import useLayoutStore from '@/stores/layout';
+import { LycNavbar, LycAlert } from '@/components/layout';
+import { LycIconButton, LycAvatar } from '@/components/basic';
 import { useI18n } from 'vue-i18n';
+import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';
 import { useRouter, useRoute } from 'vue-router';
 import { useLycTooltip } from '@/components/directives';
-import { computed, onMounted, onBeforeUnmount } from 'vue';
-import { isAccessRoute, AccessRoute, FrontRoute, getAccessName, getFrontName } from '@/router';
+import {
+  computed, onMounted, onBeforeUnmount,
+} from 'vue';
+import {
+  AccessRoute,
+  FrontRoute,
+  getAccessName,
+  getFrontName,
+  isAccessRoute,
+} from '@/router';
 import { DeviceEnum } from '@/types';
-
+import LayoutDrawer from '@/views/layout/LayoutDrawer.vue';
 
 const vLycTooltip = useLycTooltip();
 // 使用多語系
@@ -118,25 +96,17 @@ const layoutStore = useLayoutStore();
 // 使用 路由器
 const router = useRouter();
 // 使用 路由
-const route = useRoute()
+const route = useRoute();
 // 路由名稱
-const routeTitle = computed(() => route.meta.title as string)
+const routeTitle = computed(() => `${route.name as string}.title`);
 
-// 是否顯示登入
-const showLogin = computed(() => !userStore.getIsLogin && route.name !== getFrontName(FrontRoute.login))
 // 是否顯示後台
-const showAccess = computed(() => !isAccessRoute(route.name) && route.name !== getFrontName(FrontRoute.login))
-const isTablet = computed(() => [DeviceEnum.desktop, DeviceEnum.tablet].includes(layoutStore.windowSize));
+const showAccess = computed(
+  () => !isAccessRoute(route.name),
+);
+const isTablet = computed(() => [DeviceEnum.desktop, DeviceEnum.tablet]
+  .includes(layoutStore.windowSize));
 const isDesktop = computed(() => [DeviceEnum.desktop].includes(layoutStore.windowSize));
-
-const showMoreDrawer = computed({
-  get() {
-    return layoutStore.showDrawer
-  },
-  set(val) {
-    layoutStore.setShowDrawer(val)
-  }
-})
 
 /**
  * 當 回到主頁
@@ -151,6 +121,7 @@ function handleHome() {
 function handleToggleTheme() {
   layoutStore.toggleTheme();
 }
+
 /**
  * 當 切換語系
  */
@@ -160,39 +131,25 @@ function handleToggleLang() {
 }
 
 /**
- * 當 登出使用者
- */
-function handleLogout() {
-  userStore.logoutUser();
-  router.push({ name: getFrontName(FrontRoute.login) });
-}
-
-/**
- * 當 登入使用者
- */
-function handleLogin() {
-  router.push({ name: getFrontName(FrontRoute.login) });
-}
-
-/**
  * 當 進入後台
  */
 function handleAccessDashboard() {
-  if (userStore.getIsLogin)
-    router.push({ name: getAccessName(AccessRoute.dashboard) });
-  else
-    router.push({ name: getFrontName(FrontRoute.login) });
+  if (userStore.getIsLogin) router.push({ name: getAccessName(AccessRoute.dashboard) });
+  else router.push({ name: getFrontName(FrontRoute.login) });
 }
 
+/**
+ * 展開更多資訊抽屜
+ */
 function handleMoreDrawer() {
-  showMoreDrawer.value = true
+  layoutStore.setShowDrawer(true);
 }
 
 onMounted(() => {
-  window.addEventListener("resize", () => layoutStore.setWindowWidth(window.innerWidth))
-})
+  window.addEventListener('resize', () => layoutStore.setWindowWidth(window.innerWidth));
+});
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", () => { })
-})
+  window.removeEventListener('resize', () => { });
+});
 </script>

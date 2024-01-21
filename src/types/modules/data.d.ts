@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export { };
 
 export enum DeviceEnum {
@@ -8,12 +7,17 @@ export enum DeviceEnum {
 }
 
 
+
 declare global {
   namespace LycLib {
     type Enum = Record<(string | number), (string | number)>
     type Data<T = unknown> = Record<string, T>;
     type Rule = (val: unknown) => (boolean | string);
-    type Rules = Data<Rule>
+    type Rules = Data<Rule>;
+    type Alert = Object<{
+      type: string;
+      text: string;
+      index?: number;
+    }>
   }
-
 }

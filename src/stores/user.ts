@@ -1,10 +1,21 @@
 import { defineStore } from 'pinia';
-import { loginUser, logoutUser } from '@/plugins/firebase';
+import api from '@/api';
 import { isEmpty } from 'lodash';
+import lg from '@/plugins/local-storage';
+import { StorageEnum, StorageBool } from '@/types';
 
 const getState = () => ({
   // 使用者憑證
   userCredential: null as (Firebase.UserCredential | null),
+  user: {
+    email: '',
+    isAnonymous: false,
+    providerId: '',
+    uid: '',
+    displayName: null,
+    phoneNumber: null,
+    photoURL: null,
+  } as Firebase.UserInfo,
 });
 
 export default defineStore('user', {
@@ -14,12 +25,24 @@ export default defineStore('user', {
     getIsLogin: (state) => !isEmpty(state.userCredential),
   },
   actions: {
+    setUser(updates = {}) {
+      const currentUser = api.user.getCurrentUser();
+      console.log('currentUser', currentUser);
+      this.user = {
+        email: currentUser?.email,
+        isAnonymous: currentUser?.isAnonymous,
+        ...currentUser?.providerData[0],
+        ...updates,
+      } as Firebase.UserInfo;
+    },
     /**
      * 設置使用者憑證
      * @param {Firebase.User} user - 使用者憑證
      */
-    setUser(user: (Firebase.UserCredential | null)) {
+    setUserCredential(user: (Firebase.UserCredential | null)) {
       this.userCredential = user;
+      console.log('設置使用者憑證', StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
+      lg.set(StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
     },
     /**
      * 登入使用者
@@ -29,11 +52,12 @@ export default defineStore('user', {
      */
     async loginUser(email: string, password: string) {
       try {
-        const { user } = (await loginUser(
+        const { user } = (await api.user.loginUser(
           email,
           password,
         )) as Firebase.UserCredential;
-        this.setUser(user);
+        this.setUserCredential(user);
+
         return true;
       } catch (error) {
         return false;
@@ -43,8 +67,13 @@ export default defineStore('user', {
      * 登出使用者
      */
     async logoutUser() {
-      await logoutUser();
-      this.setUser(null);
+      await api.user.logoutUser();
+      this.setUserCredential(null);
+    },
+    async updateUser(updates: Firebase.UserInfoInterface) {
+      const result = await api.user.updateUser(updates);
+      console.log(updates, result);
+      this.setUser(updates);
     },
   },
 });

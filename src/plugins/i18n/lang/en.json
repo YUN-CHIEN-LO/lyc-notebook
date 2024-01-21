@@ -15,7 +15,7 @@
     "invalidFormat": "Invalid value format.",
     "invalidAccount": "Invalid email or wrong password."
   },
-  "loginView": {
+  "login": {
     "title": "Log In",
     "email": "Email",
     "password": "Password",
@@ -23,13 +23,13 @@
     "logout": "Log Out",
     "reset": "Reset"
   },
-  "dashboardView": {
+  "dashboard": {
     "title": "Welcome!"
   },
-  "accessDashboardView": {
+  "access-dashboard": {
     "title": "Something exciting to share?"
   },
-  "errorPage": {
+  "error": {
     "title": "Something went wrong..."
   }
 }

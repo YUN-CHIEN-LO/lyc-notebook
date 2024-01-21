@@ -59,8 +59,8 @@ export default defineComponent({
     },
     vertical: {
       type: Boolean as PropType<boolean>,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props, { attrs }) {
     const listeners = computed(() => getComponentListeners(attrs));
@@ -102,7 +102,6 @@ export default defineComponent({
 
   }
 
-
   &__prefix-icon {
     margin-right: s-unit(2);
   }
@@ -110,7 +109,6 @@ export default defineComponent({
   &__content {
     flex: 1;
   }
-
 
   @include transitions(background-color 0.1s linear);
 

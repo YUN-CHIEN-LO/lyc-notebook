@@ -21,8 +21,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 import * as allIcon from '@mdi/js';
-import lycLogo from "@/assets/lycLogo"
-
+import lycLogo from '@/assets/lycLogo';
 
 export default defineComponent({
   name: 'LycIcon',
@@ -45,7 +44,7 @@ export default defineComponent({
     // svg d
     const d = computed(() => {
       switch (props.icon) {
-        case "lycLogo":
+        case 'lycLogo':
           return lycLogo;
         default:
           return allIcon[props.icon as keyof typeof allIcon] ?? '';

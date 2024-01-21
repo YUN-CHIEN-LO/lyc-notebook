@@ -18,7 +18,7 @@
   "todoPage": {
     "title": "歡迎!"
   },
-  "loginView": {
+  "login": {
     "title": "登入",
     "email": "電子信箱",
     "password": "密碼",
@@ -26,13 +26,13 @@
     "logout": "登出",
     "reset": "清除"
   },
-  "dashboardView": {
+  "dashboard": {
     "title": "歡迎光臨！"
   },
-  "accessDashboardView": {
+  "access-dashboard": {
     "title": "今天想分享什麼呢？"
   },
-  "errorPage": {
+  "error": {
     "title": "似乎出錯了..."
   }
 }

@@ -8,7 +8,7 @@ export enum FrontRoute {
 }
 
 export function getFrontName(key: FrontRoute): string {
-  return `front${getEnumKeyByValue(FrontRoute, key)}`
+  return `${getEnumKeyByValue(FrontRoute, key)}`
 }
 
 export function getFrontPath(key: FrontRoute): string {
@@ -22,19 +22,11 @@ export const frontRoutes = [
     path: getFrontPath(FrontRoute.dashboard),
     name: getFrontName(FrontRoute.dashboard),
     component: () => import('@/views/front/DashboardView.vue'),
-    children: [],
-    meta: {
-      title: 'dashboardView.title',
-    },
   },
   // 登入頁面
   {
     path: getFrontPath(FrontRoute.login),
     name: getFrontName(FrontRoute.login),
     component: () => import('@/views/LoginView.vue'),
-    children: [],
-    meta: {
-      title: 'loginView.title',
-    },
   },
 ];

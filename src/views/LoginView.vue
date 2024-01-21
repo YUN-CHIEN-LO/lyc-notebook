@@ -7,10 +7,10 @@
       :form="form"
     >
       <h1 class="tac">
-        {{ $t('loginView.title') }}
+        {{ $t('login.title') }}
       </h1>
       <lyc-form-item
-        :label="$t('loginView.email')"
+        :label="$t('login.email')"
         name="email"
       >
         <LycInput
@@ -22,7 +22,7 @@
         />
       </lyc-form-item>
       <lyc-form-item
-        :label="$t('loginView.password')"
+        :label="$t('login.password')"
         name="password"
       >
         <lyc-input
@@ -50,7 +50,7 @@
         color="primary"
         @click.prevent="handleSubmit"
       >
-        {{ $t('loginView.login') }}
+        {{ $t('login.login') }}
       </lyc-button>
     </lyc-form>
   </div>
@@ -69,7 +69,7 @@ import useLayoutStore from '@/stores/layout';
 import { useRouter } from 'vue-router';
 import { AccessRoute, getAccessName } from '@/router';
 
-const router = useRouter()
+const router = useRouter();
 
 // 使用多語系
 const i18n = useI18n();
@@ -123,9 +123,13 @@ async function handleSubmit() {
         password: i18n.t('validation.invalidAccount'),
       });
       // 拋出錯誤
+      layoutStore.systemAlert = {
+        text: i18n.t('validation.invalidAccount'),
+        type: 'alert',
+      };
       throw new Error();
     }
-    router.push({ name: getAccessName(AccessRoute.dashboard) })
+    router.push({ name: getAccessName(AccessRoute.dashboard) });
   } catch (error) {
     if (userStore.getIsLogin) {
       // 登出使用者

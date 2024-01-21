@@ -16,14 +16,6 @@
   flex-wrap: $fw;
 }
 
-@mixin shadow($shadow...) {
-  @each $pre in -webkit-, -moz-, -ms-, -o- {
-    #{$pre + box-shadow}: $shadow;
-  }
-
-  #{box-shadow}: $shadow;
-}
-
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
@@ -69,7 +61,7 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @mixin medium-device {
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 768px) and (max-width: 992px) {
     @content;
   }
 }
@@ -92,4 +84,12 @@
   -moz-transition: $transitions;
   -o-transition: $transitions;
   transition: $transitions;
+}
+
+@mixin shadow($shadow...) {
+  @each $pre in -webkit-, -moz-, -ms-, -o- {
+    #{$pre + box-shadow}: $shadow;
+  }
+
+  #{box-shadow}: $shadow;
 }

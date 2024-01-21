@@ -15,7 +15,8 @@ const getState = () => ({
   // 當前視窗寬
   windowWidth: 1200,
   windowSize: DeviceEnum.desktop,
-  showDrawer: false
+  showDrawer: false,
+  systemAlert: undefined as LycLib.Alert,
 });
 
 export default defineStore('layout', {
@@ -29,7 +30,7 @@ export default defineStore('layout', {
   },
   actions: {
     setShowDrawer(show: boolean) {
-      this.showDrawer = show
+      this.showDrawer = show;
     },
     /**
      * 設置當前主題
@@ -68,7 +69,6 @@ export default defineStore('layout', {
       if (width < 768) this.windowSize = DeviceEnum.mobile;
       else if (width < 992) this.windowSize = DeviceEnum.tablet;
       else this.windowSize = DeviceEnum.desktop;
-
     },
     /**
      * 切換當前主題

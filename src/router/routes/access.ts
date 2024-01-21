@@ -2,15 +2,16 @@ import { getEnumKeyByValue } from '@/utils';
 
 export enum AccessRoute {
   'root',
-  'dashboard'
+  'dashboard',
+  'userAccount'
 }
 
 export function getAccessName(key: AccessRoute): string {
-  return `access${getEnumKeyByValue(AccessRoute, key)}`
+  return `access-${getEnumKeyByValue(AccessRoute, key)}`
 }
 
 export function getAccessPath(key: AccessRoute): string {
-  return getEnumKeyByValue(AccessRoute, key)
+  return `/access-${getEnumKeyByValue(AccessRoute, key)}`
 }
 
 export const accessRoutes = [
@@ -19,9 +20,11 @@ export const accessRoutes = [
     path: getAccessPath(AccessRoute.dashboard),
     name: getAccessName(AccessRoute.dashboard),
     component: () => import('@/views/access/DashboardView.vue'),
-    children: [],
-    meta: {
-      title: 'accessDashboardView.title',
-    },
   },
-];
+  // 使用者設定
+  {
+    path: getAccessPath(AccessRoute.userAccount),
+    name: getAccessName(AccessRoute.userAccount),
+    component: () => import('@/views/access/UserAccountView.vue'),
+  }
+]
