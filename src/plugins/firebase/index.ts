@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile
 } from 'firebase/auth';
 
 import userUserStore from '@/stores/user';
@@ -23,7 +24,8 @@ const auth = getAuth(firebaseApp);
 
 onAuthStateChanged(auth, (user: Firebase.User) => {
   const store = userUserStore();
-  store.setUser(user);
+  store.setUserCredential(user);
+  store.setUser();
 });
 
 /**
@@ -58,4 +60,14 @@ export function loginUser(
  */
 export function logoutUser() {
   return signOut(auth);
+}
+
+export function getCurrentUser() {
+  return auth.currentUser
+}
+
+export function updateCurrentUser(updates: Firebase.UserInfoInterface) {
+  if (auth.currentUser)
+    return updateProfile(auth.currentUser, { ...updates })
+  else return Promise.reject()
 }

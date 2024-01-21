@@ -1,6 +1,10 @@
 <template>
   <div>
-
+    <ol>
+      <li>loading</li>
+      <li>alert</li>
+      <li>user page</li>
+    </ol>
   </div>
 </template>
 

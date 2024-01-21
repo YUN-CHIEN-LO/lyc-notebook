@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
-import { loginUser, logoutUser } from '@/plugins/firebase';
+import { getCurrentUser, loginUser, logoutUser } from '@/plugins/firebase';
 import { isEmpty } from 'lodash';
 
 const getState = () => ({
   // 使用者憑證
   userCredential: null as (Firebase.UserCredential | null),
+  user: undefined as Firebase.User
 });
 
 export default defineStore('user', {
@@ -14,11 +15,14 @@ export default defineStore('user', {
     getIsLogin: (state) => !isEmpty(state.userCredential),
   },
   actions: {
+    setUser() {
+      this.user = getCurrentUser()
+    },
     /**
      * 設置使用者憑證
      * @param {Firebase.User} user - 使用者憑證
      */
-    setUser(user: (Firebase.UserCredential | null)) {
+    setUserCredential(user: (Firebase.UserCredential | null)) {
       this.userCredential = user;
     },
     /**
@@ -33,7 +37,7 @@ export default defineStore('user', {
           email,
           password,
         )) as Firebase.UserCredential;
-        this.setUser(user);
+        this.setUserCredential(user);
         return true;
       } catch (error) {
         return false;
@@ -44,7 +48,7 @@ export default defineStore('user', {
      */
     async logoutUser() {
       await logoutUser();
-      this.setUser(null);
+      this.setUserCredential(null);
     },
   },
 });

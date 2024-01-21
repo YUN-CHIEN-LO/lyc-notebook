@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import lg from '@/plugins/local-storage';
 import { StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
+import useUserStore from "@/stores/user"
 import { AccessRoute, accessRoutes, getAccessName, getAccessPath } from '@/router/routes/access';
 import { FrontRoute, frontRoutes, getFrontName, getFrontPath } from '@/router/routes/front';
 import i18n from '@/plugins/i18n';
@@ -64,7 +65,15 @@ router.beforeEach((to, from, next) => {
   const layoutStore = useLayoutStore();
   const saveTheme = lg.get(StorageEnum.THEME);
   if (!layoutStore.$state.theme) layoutStore.setTheme(Number(saveTheme) ?? 0);
+
+  const saveLang = lg.get(StorageEnum.LANG);
+  if (!layoutStore.$state.lang) layoutStore.setLang(Number(saveLang) ?? 0);
+
+
   layoutStore.setShowDrawer(false)
+
+  const userStore = useUserStore();
+  userStore.setUser()
   next();
 });
 

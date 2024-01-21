@@ -9,6 +9,7 @@ declare global {
     type App = firebase.default.app.App;
 
     type UserCredential = firebase.auth.UserCredential;
+    type UserInfoInterface = firebase.auth.UserInfoInterface
 
     type User = firebase.default.User;
 

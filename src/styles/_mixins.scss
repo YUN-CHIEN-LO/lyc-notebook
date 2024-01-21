@@ -16,14 +16,6 @@
   flex-wrap: $fw;
 }
 
-@mixin shadow($shadow...) {
-  @each $pre in -webkit-, -moz-, -ms-, -o- {
-    #{$pre + box-shadow}: $shadow;
-  }
-
-  #{box-shadow}: $shadow;
-}
-
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content;
@@ -92,4 +84,12 @@
   -moz-transition: $transitions;
   -o-transition: $transitions;
   transition: $transitions;
+}
+
+@mixin shadow($shadow...) {
+  @each $pre in -webkit-, -moz-, -ms-, -o- {
+    #{$pre + box-shadow}: $shadow;
+  }
+
+  #{box-shadow}: $shadow;
 }

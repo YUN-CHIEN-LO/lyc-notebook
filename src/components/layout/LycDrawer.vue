@@ -69,7 +69,7 @@ export default defineComponent({
   right: 0;
   background-color: color(backdrop, 1);
   height: 100vh;
-  @include shadow(0px g-unit(-4) g-unit(3) g-unit(1) color(backdrop, 6));
+  @include shadow(0px 0px g-unit(3) g-unit(1) color(backdrop, 6));
 
   &__header {
     @include flex();
@@ -88,7 +88,7 @@ export default defineComponent({
     padding: s-unit(0) s-unit(2) s-unit(2);
   }
 
-  transform: translateX(100%);
+  transform: translateX(calc(100% + g-unit(4)));
 
   @include transitions(transform 0.3s ease-in);
 
@@ -108,6 +108,7 @@ export default defineComponent({
 
   &--open {
     transform: translateX(0);
+
   }
 }
 </style>
