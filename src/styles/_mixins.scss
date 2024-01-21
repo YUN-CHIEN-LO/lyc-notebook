@@ -1,0 +1,95 @@
+/// 設置 flex
+///
+/// @param {string} $jc
+///   justify-content，預設 flex-start
+/// @param {string} $ai
+///   align-items，預設 center
+/// @param {string} $fd
+///   align-items，預設 column
+/// @param {string} $fw
+///   align-items，預設 wrap
+@mixin flex($jc: flex-start, $ai: center, $fd: row, $fw: wrap) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $fd;
+  flex-wrap: $fw;
+}
+
+@mixin shadow($shadow...) {
+  @each $pre in -webkit-, -moz-, -ms-, -o- {
+    #{$pre + box-shadow}: $shadow;
+  }
+
+  #{box-shadow}: $shadow;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {
+    @content;
+  }
+
+  :-moz-placeholder {
+    @content;
+  }
+
+  ::-moz-placeholder {
+    @content;
+  }
+
+  :-ms-input-placeholder {
+    @content;
+  }
+}
+
+/* Small devices (phones, 600px and down) */
+@mixin small-device {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@mixin medium-device {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@mixin large-device {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin utils-user-select($value) {
+  -moz-user-select: $value;
+  -webkit-user-select: $value;
+  -ms-user-select: $value;
+}
+
+@mixin transitions($transitions...) {
+  -webkit-transition: $transitions;
+  -moz-transition: $transitions;
+  -o-transition: $transitions;
+  transition: $transitions;
+}

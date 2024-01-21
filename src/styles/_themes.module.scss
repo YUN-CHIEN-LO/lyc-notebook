@@ -1,0 +1,30 @@
+/// 定義全域色票
+$theme-light: (
+  "primary": #904516,
+  "secondary": #f9ab36,
+  "alert": #d14141,
+  "backdrop": #ededed,
+  "text": #747474,
+  "dark": #242424,
+  "light": #ffffff,
+);
+
+$theme-dark: (
+  "primary": #a57eff,
+  "secondary": #d37cf2,
+  "alert": #fe4f4f,
+  "backdrop": #353535,
+  "text": #adadad,
+  "dark": #ffffff,
+  "light": #242424,
+);
+
+/// 輸出變數模組
+:export {
+  @each $key, $value in $theme-light {
+    #{'light-'+unquote($key)}: $value;
+  }
+  @each $key, $value in $theme-dark {
+    #{'dark-'+unquote($key)}: $value;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  // 編輯器設定
+  "editor.fontLigatures": true,
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "editor.renderControlCharacters": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["typescript"],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  // 換行符號
+  "files.eol": "\n",
+  // emmet 輸入設定
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "emmet.includeLanguages": {
+    "vue-html": "html"
+  },
+  // html 相關配置
+  "html.format.wrapAttributes": "force-expand-multiline",
+  // JS/TS 相關配置
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  // 配置副檔名與預設語言狀態
+  "files.associations": {
+    "*.json": "jsonc",
+    "*.cjs": "javascript"
+  },
+
+  /* --- Vue3 --- */
+  // vue 配置
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
+  /* --- end of Vue3 --- */
+}

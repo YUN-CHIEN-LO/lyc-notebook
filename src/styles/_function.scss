@@ -1,0 +1,48 @@
+$base-unit: 8;
+$base-font: 12;
+
+:root {
+  --padding-unit: #{$base-unit};
+  --margin-unit: #{$base-unit};
+  --font-size: #{$base-font};
+}
+
+@include small-device {
+  :root {
+    --padding-unit: 10;
+    --margin-unit: 4;
+    --font-size: 12;
+  }
+}
+
+@include medium-device {
+  :root {
+    --padding-unit: 8;
+    --margin-unit: 8;
+    --font-size: 14;
+  }
+}
+
+@include large-device {
+  :root {
+    --padding-unit: 8;
+    --margin-unit: 8;
+    --font-size: 12;
+  }
+}
+
+@function color($color, $index: 4) {
+  @return var(--color-#{$color}-#{$index});
+}
+@function g-unit($i) {
+  @return calc(#{$i} * 1px * var(--padding-unit));
+}
+@function s-unit($i) {
+  @return calc(#{$i} * 1px * var(--margin-unit));
+}
+@function fz($i) {
+  @return calc(#{$i} * 2px + var(--font-size) * 1px);
+}
+@function lh($i) {
+  @return calc((#{$i} + 3) * var(--padding-unit) * 1px);
+}

@@ -1,0 +1,35 @@
+{
+  "system": {
+    "projectName": "Chien's notes",
+    "toAccess": "Write something!",
+    "moreInfo": "More",
+    "light": "Dark mode",
+    "dark": "Light mode"
+  },
+  "lang": {
+    "en": "繁體中文",
+    "zhTW": "English"
+  },
+  "validation": {
+    "empty": "Please fill in.",
+    "invalidFormat": "Invalid value format.",
+    "invalidAccount": "Invalid email or wrong password."
+  },
+  "loginView": {
+    "title": "Log In",
+    "email": "Email",
+    "password": "Password",
+    "login": "Log In",
+    "logout": "Log Out",
+    "reset": "Reset"
+  },
+  "dashboardView": {
+    "title": "Welcome!"
+  },
+  "accessDashboardView": {
+    "title": "Something exciting to share?"
+  },
+  "errorPage": {
+    "title": "Something went wrong..."
+  }
+}

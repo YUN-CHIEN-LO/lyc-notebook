@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:color";
+@import "./mixins";
+@import "./themes.module";
+@import "./extends";
+@import "./function";
+
+@mixin theme($theme) {
+  @each $name
+    in ("primary", "secondary", "backdrop", "text", "dark", "light", "alert")
+  {
+    --color-#{$name}: #{map.get($theme, #{$name})};
+    @for $i from 1 through 4 {
+      --color-#{$name}-#{$i}: #{mix(
+          map.get($theme, #{$name}),
+          map.get($theme, light),
+          $i * 20%
+        )};
+    }
+    --color-#{$name}-5: #{map.get($theme, #{$name})};
+    @for $i from 1 through 4 {
+      --color-#{$name}-#{$i+5}: #{mix(
+          map.get($theme, #{$name}),
+          map.get($theme, dark),
+          (5-$i) * 20%
+        )};
+    }
+  }
+}
+
+[data-theme="light"] {
+  @include theme($theme: $theme-light);
+}
+
+[data-theme="dark"] {
+  @include theme($theme: $theme-dark);
+}
+
+$color-font: color(dark) !default;
+$color-font-inverse: color(light) !default;
+$font-size: fz(4);
+$navbar-height: g-unit(10);
