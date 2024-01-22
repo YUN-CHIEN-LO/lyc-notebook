@@ -39,10 +39,46 @@
     "*.cjs": "javascript"
   },
 
+  // /* --- Vue2 --- */
+  // // vue 配置
+  // "[vue]": {
+  //   // Vue 預設使用格式化工具
+  //   "editor.defaultFormatter": "octref.vetur"
+  // },
+  // // <style> 區塊套用 indent
+  // "vetur.format.styleInitialIndent": true,
+  // // <scrpit> 區塊不套用 indent
+  // "vetur.format.scriptInitialIndent": false,
+  // // JavaScript 預設使用格式化工具
+  // "vetur.format.defaultFormatter.js": "vscode-typescript",
+  // "vetur.format.defaultFormatterOptions": {
+  //   // prettier 設定
+  //   "prettier": {
+  //     // 行尾添加分號
+  //     "semi": true,
+  //     // 使用單引號
+  //     "singleQuote": true,
+  //     // 行尾添加逗號
+  //     "trailingComma": "all",
+  //     // 換行符號
+  //     "endOfLine": "lf",
+  //     // html attr 換行
+  //     "singleAttributePerLine": true,
+  //     // html tag 換行
+  //     "htmlWhitespaceSensitivity": "ignore"
+  //   }
+  // },
+  // "vetur.grammar.customBlocks": {
+  //   "docs": "md",
+  //   "i18n": "json"
+  // }
+  // /* --- end of Vue2 --- */
+
   /* --- Vue3 --- */
   // vue 配置
   "[vue]": {
     "editor.defaultFormatter": "Vue.volar"
-  }
+  },
+  "i18n-ally.localesPaths": ["src/plugins/i18n", "src/plugins/i18n/lang"]
   /* --- end of Vue3 --- */
 }

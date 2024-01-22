@@ -1,11 +1,19 @@
 import { defineStore } from 'pinia';
-import { getCurrentUser, loginUser, logoutUser } from '@/plugins/firebase';
+import api from '@/api';
 import { isEmpty } from 'lodash';
 
 const getState = () => ({
   // 使用者憑證
   userCredential: null as (Firebase.UserCredential | null),
-  user: undefined as Firebase.User
+  user: {
+    email: '',
+    isAnonymous: false,
+    providerId: '',
+    uid: '',
+    displayName: null,
+    phoneNumber: null,
+    photoURL: null,
+  } as Firebase.UserInfo,
 });
 
 export default defineStore('user', {
@@ -15,8 +23,14 @@ export default defineStore('user', {
     getIsLogin: (state) => !isEmpty(state.userCredential),
   },
   actions: {
-    setUser() {
-      this.user = getCurrentUser()
+    setUser(updates = {}) {
+      const currentUser = api.user.getCurrentUser();
+      this.user = {
+        email: currentUser?.email,
+        isAnonymous: currentUser?.isAnonymous,
+        ...currentUser?.providerData[0],
+        ...updates,
+      } as Firebase.UserInfo;
     },
     /**
      * 設置使用者憑證
@@ -33,7 +47,7 @@ export default defineStore('user', {
      */
     async loginUser(email: string, password: string) {
       try {
-        const { user } = (await loginUser(
+        const { user } = (await api.user.loginUser(
           email,
           password,
         )) as Firebase.UserCredential;
@@ -47,8 +61,13 @@ export default defineStore('user', {
      * 登出使用者
      */
     async logoutUser() {
-      await logoutUser();
+      await api.user.logoutUser();
       this.setUserCredential(null);
+    },
+    async updateUser(updates: Firebase.UserInfoInterface) {
+      const result = await api.user.updateUser(updates);
+      console.log(updates, result);
+      this.setUser(updates);
     },
   },
 });

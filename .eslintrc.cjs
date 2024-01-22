@@ -19,13 +19,11 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {
-        project: path.join(__dirname, './tsconfig.json'),
-      },
+      typescript: {},
       'eslint-import-resolver-custom-alias': {
-        map: [
-          ['@', path.join(__dirname, './src')],
-        ],
+        alias: {
+          '@': './src',
+        },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.vue'],
       },
     },
@@ -47,4 +45,5 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-undef': 'off',
   },
+
 };

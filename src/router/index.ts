@@ -2,9 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 import lg from '@/plugins/local-storage';
 import { StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
-import useUserStore from "@/stores/user"
-import { AccessRoute, accessRoutes, getAccessName, getAccessPath } from '@/router/routes/access';
-import { FrontRoute, frontRoutes, getFrontName, getFrontPath } from '@/router/routes/front';
+import useUserStore from '@/stores/user';
+import {
+  AccessRoute, accessRoutes, getAccessName, getAccessPath,
+} from '@/router/routes/access';
+import {
+  FrontRoute, frontRoutes, getFrontName, getFrontPath,
+} from '@/router/routes/front';
 import i18n from '@/plugins/i18n';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -69,11 +73,10 @@ router.beforeEach((to, from, next) => {
   const saveLang = lg.get(StorageEnum.LANG);
   if (!layoutStore.$state.lang) layoutStore.setLang(Number(saveLang) ?? 0);
 
-
-  layoutStore.setShowDrawer(false)
+  layoutStore.setShowDrawer(false);
 
   const userStore = useUserStore();
-  userStore.setUser()
+  userStore.setUser();
   next();
 });
 
@@ -89,4 +92,4 @@ export default router;
 
 export * from '@/router/routes/access';
 export * from '@/router/routes/front';
-export * from "@/router/route-helper"
+export * from '@/router/route-helper';

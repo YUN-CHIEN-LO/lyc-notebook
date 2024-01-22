@@ -69,7 +69,7 @@ import useLayoutStore from '@/stores/layout';
 import { useRouter } from 'vue-router';
 import { AccessRoute, getAccessName } from '@/router';
 
-const router = useRouter()
+const router = useRouter();
 
 // 使用多語系
 const i18n = useI18n();
@@ -125,7 +125,7 @@ async function handleSubmit() {
       // 拋出錯誤
       throw new Error();
     }
-    router.push({ name: getAccessName(AccessRoute.dashboard) })
+    router.push({ name: getAccessName(AccessRoute.dashboard) });
   } catch (error) {
     if (userStore.getIsLogin) {
       // 登出使用者
