@@ -60,18 +60,22 @@
     </main>
 
     <LayoutDrawer />
+
+    <LycAlert v-model="layoutStore.systemAlerts" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { LycNavbar } from '@/components/layout';
+import { LycNavbar, LycAlert } from '@/components/layout';
 import { LycIconButton, LycAvatar } from '@/components/basic';
 import { useI18n } from 'vue-i18n';
 import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';
 import { useRouter, useRoute } from 'vue-router';
 import { useLycTooltip } from '@/components/directives';
-import { computed, onMounted, onBeforeUnmount } from 'vue';
+import {
+  computed, onMounted, onBeforeUnmount,
+} from 'vue';
 import {
   AccessRoute,
   FrontRoute,
