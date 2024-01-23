@@ -38,7 +38,16 @@
         />
 
         <!-- 更多資訊 -->
+        <LycAvatar
+          v-if="userStore.getIsLogin"
+          class="ml-g-1"
+          v-lyc-tooltip="$t('system.moreInfo')"
+          :url="userStore.user.photoURL"
+          :alt="userStore.user.displayName"
+          @click="handleMoreDrawer"
+        />
         <LycIconButton
+          v-else
           v-lyc-tooltip="$t('system.moreInfo')"
           icon="mdiMenu"
           @click="handleMoreDrawer"
@@ -56,7 +65,7 @@
 
 <script setup lang="ts">
 import { LycNavbar } from '@/components/layout';
-import { LycIconButton } from '@/components/basic';
+import { LycIconButton, LycAvatar } from '@/components/basic';
 import { useI18n } from 'vue-i18n';
 import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';

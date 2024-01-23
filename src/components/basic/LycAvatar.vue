@@ -38,8 +38,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .lyc-avatar {
   border-radius: 100%;
-  width: g-unit(5);
-  height: g-unit(5);
+  width: g-unit(6);
+  height: g-unit(6);
   box-sizing: border-box;
   @include flex($jc: center);
   background-color: color(primary, 1);
@@ -51,8 +51,8 @@ export default defineComponent({
   }
 
   &__image {
-    width: g-unit(5);
-    height: g-unit(5);
+    width: g-unit(6);
+    height: g-unit(6);
     object-fit: cover;
   }
 
