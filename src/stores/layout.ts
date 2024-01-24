@@ -16,7 +16,7 @@ const getState = () => ({
   windowWidth: 1200,
   windowSize: DeviceEnum.desktop,
   showDrawer: false,
-  systemAlerts: [] as Array<LycLib.Alert>,
+  systemAlert: undefined as LycLib.Alert,
 });
 
 export default defineStore('layout', {
@@ -29,7 +29,6 @@ export default defineStore('layout', {
     getWindowSize: (state) => getEnumKeyByValue(DeviceEnum, state.windowSize),
   },
   actions: {
-
     setShowDrawer(show: boolean) {
       this.showDrawer = show;
     },

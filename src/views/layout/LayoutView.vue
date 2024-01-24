@@ -61,7 +61,7 @@
 
     <LayoutDrawer />
 
-    <LycAlert v-model="layoutStore.systemAlerts" />
+    <LycAlert v-model="layoutStore.systemAlert" />
   </div>
 </template>
 

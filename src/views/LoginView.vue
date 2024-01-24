@@ -123,6 +123,10 @@ async function handleSubmit() {
         password: i18n.t('validation.invalidAccount'),
       });
       // 拋出錯誤
+      layoutStore.systemAlert = {
+        text: i18n.t('validation.invalidAccount'),
+        type: 'alert',
+      };
       throw new Error();
     }
     router.push({ name: getAccessName(AccessRoute.dashboard) });
