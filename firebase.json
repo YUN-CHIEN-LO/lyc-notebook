@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "lyc-notebook-49edb",
-    "public": "dist",
+    "public": "./dist",
     "rewrites": [
       {
         "source": "**",

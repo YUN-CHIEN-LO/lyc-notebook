@@ -16,25 +16,20 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 // 路由清單
 const routes = [
   {
-    path: '/',
-    redirect: `/${baseUrl}`,
-    children: [],
-  },
-  {
-    path: `/${baseUrl}/access`,
+    path: '/access',
     name: getAccessName(AccessRoute.root),
     component: () => import('@/views/layout/LayoutView.vue'),
-    redirect: `/${baseUrl}/access/${getAccessPath(AccessRoute.dashboard)}`,
+    redirect: `/access/${getAccessPath(AccessRoute.dashboard)}`,
     children: [
       // 權限路由
       ...accessRoutes,
     ],
   },
   {
-    path: `/${baseUrl}`,
+    path: '/',
     name: getFrontName(FrontRoute.root),
     component: () => import('@/views/layout/LayoutView.vue'),
-    redirect: `/${baseUrl}/${getFrontPath(FrontRoute.dashboard)}`,
+    redirect: `/${getFrontPath(FrontRoute.dashboard)}`,
     children: [
       // 白名單路由
       ...frontRoutes,
@@ -54,14 +49,14 @@ const routes = [
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
-    redirect: `${baseUrl}/error/404`,
+    redirect: 'error/404',
     children: [],
   },
 ];
 
 // 建立路由
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(baseUrl),
   routes,
 });
 

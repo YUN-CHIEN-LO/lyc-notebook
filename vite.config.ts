@@ -41,7 +41,7 @@ function setConfig(env) {
         gzipSize: true,
         brotliSize: true,
       })],
-    base: `./`,
+    base: '/lyc-notebook-49edb/',
     css: {
       preprocessorOptions: {
         scss: {
@@ -64,8 +64,8 @@ function setConfig(env) {
       rollupOptions: {
         output: {
           manualChunks(id: any) {
-            if (id.includes("node_modules")) {
-              return id.toString().split("node_modules/")[1].split("/")[0].toString();
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
             }
           },
         },
