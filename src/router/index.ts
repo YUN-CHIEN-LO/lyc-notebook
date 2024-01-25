@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import lg from '@/plugins/local-storage';
 import { StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
@@ -10,8 +10,7 @@ import {
   FrontRoute, frontRoutes, getFrontName, getFrontPath,
 } from '@/router/routes/front';
 import i18n from '@/plugins/i18n';
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
+import { isAccessRoute } from '@/router/route-helper';
 
 // 路由清單
 const routes = [
@@ -56,7 +55,7 @@ const routes = [
 
 // 建立路由
 const router = createRouter({
-  history: createWebHistory(baseUrl),
+  history: createWebHashHistory(),
   routes,
 });
 
@@ -71,6 +70,8 @@ router.beforeEach((to, from, next) => {
   layoutStore.setShowDrawer(false);
 
   const userStore = useUserStore();
+  if (!userStore.getIsLogin && isAccessRoute(to.name)) next(getFrontName(FrontRoute.login));
+
   userStore.setUser();
   next();
 });

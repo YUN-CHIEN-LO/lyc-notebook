@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import {
   defineConfig, loadEnv, splitVendorChunkPlugin,
 } from 'vite';
@@ -41,7 +42,7 @@ function setConfig(env) {
         gzipSize: true,
         brotliSize: true,
       })],
-    base: '/lyc-notebook-49edb/',
+    base: './',
     css: {
       preprocessorOptions: {
         scss: {
@@ -63,7 +64,7 @@ function setConfig(env) {
     build: {
       rollupOptions: {
         output: {
-          manualChunks(id: any) {
+          manualChunks(id: string) {
             if (id.includes('node_modules')) {
               return id.toString().split('node_modules/')[1].split('/')[0].toString();
             }
