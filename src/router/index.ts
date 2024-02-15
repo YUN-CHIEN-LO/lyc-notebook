@@ -1,6 +1,6 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import lg from '@/plugins/local-storage';
-import { StorageEnum } from '@/types';
+import { StorageBool, StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';
 import {
@@ -55,11 +55,11 @@ const routes = [
 
 // 建立路由
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const layoutStore = useLayoutStore();
   const saveTheme = lg.get(StorageEnum.THEME);
   if (!layoutStore.$state.theme) layoutStore.setTheme(Number(saveTheme) ?? 0);
@@ -67,13 +67,18 @@ router.beforeEach((to, from, next) => {
   const saveLang = lg.get(StorageEnum.LANG);
   if (!layoutStore.$state.lang) layoutStore.setLang(Number(saveLang) ?? 0);
 
+  const saveLogin = (lg.get(StorageEnum.LOGIN));
+  if (saveLogin !== `${StorageBool.true}`
+    && isAccessRoute(to.name)) {
+    return { name: getFrontName(FrontRoute.login) };
+  }
+
   layoutStore.setShowDrawer(false);
 
   const userStore = useUserStore();
-  if (!userStore.getIsLogin && isAccessRoute(to.name)) next(getFrontName(FrontRoute.login));
 
   userStore.setUser();
-  next();
+  return true;
 });
 
 router.afterEach((to) => {

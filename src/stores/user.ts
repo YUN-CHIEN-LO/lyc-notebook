@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import api from '@/api';
 import { isEmpty } from 'lodash';
+import lg from '@/plugins/local-storage';
+import { StorageEnum, StorageBool } from '@/types';
 
 const getState = () => ({
   // 使用者憑證
@@ -25,6 +27,7 @@ export default defineStore('user', {
   actions: {
     setUser(updates = {}) {
       const currentUser = api.user.getCurrentUser();
+      console.log('currentUser', currentUser);
       this.user = {
         email: currentUser?.email,
         isAnonymous: currentUser?.isAnonymous,
@@ -38,6 +41,8 @@ export default defineStore('user', {
      */
     setUserCredential(user: (Firebase.UserCredential | null)) {
       this.userCredential = user;
+      console.log('設置使用者憑證', StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
+      lg.set(StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
     },
     /**
      * 登入使用者
@@ -52,6 +57,7 @@ export default defineStore('user', {
           password,
         )) as Firebase.UserCredential;
         this.setUserCredential(user);
+
         return true;
       } catch (error) {
         return false;
