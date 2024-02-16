@@ -33,11 +33,9 @@ import {
 } from 'vue';
 import type { PropType, InputTypeHTMLAttribute } from 'vue';
 import { isEmpty, isFunction } from 'lodash';
-import LycIconButton from '@/components/basic/LycIconButton.vue';
 
 export default defineComponent({
   name: 'LycInput',
-  components: { LycIconButton },
   inheritAttrs: false,
   props: {
     // v-model 綁定值

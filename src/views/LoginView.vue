@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import {
-  LycInput, LycButton, LycFormItem, LycForm, LycIconButton,
+  LycForm,
 } from '@/components/basic';
 import {
   reactive, ref, watch, computed,

@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { LycButton } from '@/components/basic';
-import { LycArticle, LycRow, LycColumn } from '@/components/layout';
 import useUserStore from '@/stores/user';
 
 const userStore = useUserStore();

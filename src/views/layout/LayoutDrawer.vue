@@ -52,8 +52,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { LycAvatar, LycButton } from '@/components/basic';
-import { LycDrawer } from '@/components/layout';
 import useUserStore from '@/stores/user';
 import useLayoutStore from '@/stores/layout';
 import { useRouter, useRoute } from 'vue-router';

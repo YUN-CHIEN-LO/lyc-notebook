@@ -27,8 +27,6 @@
 
 <script lang="ts">
 import { isEmpty } from 'lodash';
-import LycIcon from '@/components/basic/LycIcon.vue';
-import LycIconButton from '@/components/basic/LycIconButton.vue';
 import {
   reactive, watch, PropType, defineComponent,
 } from 'vue';
@@ -36,7 +34,6 @@ import { getUniqueId } from '@/utils';
 
 export default defineComponent({
   name: 'LycAlert',
-  components: { LycIcon, LycIconButton },
   props: {
     // 警鈔資訊
     modelValue: {

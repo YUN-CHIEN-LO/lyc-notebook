@@ -22,11 +22,9 @@
 import type { PropType, ButtonHTMLAttributes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { getComponentListeners } from '@/utils';
-import LycIcon from '@/components/basic/LycIcon.vue';
 
 export default defineComponent({
   name: 'LycButton',
-  components: { LycIcon },
   props: {
     // 圖示名稱
     prefixIcon: {

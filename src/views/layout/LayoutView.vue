@@ -66,8 +66,6 @@
 </template>
 
 <script setup lang="ts">
-import { LycNavbar, LycAlert } from '@/components/layout';
-import { LycIconButton, LycAvatar } from '@/components/basic';
 import { useI18n } from 'vue-i18n';
 import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';

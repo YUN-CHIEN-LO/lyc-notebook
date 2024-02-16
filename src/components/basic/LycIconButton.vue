@@ -22,7 +22,6 @@ import LycButton from '@/components/basic/LycButton.vue';
 
 export default defineComponent({
   name: 'LycIconButton',
-  components: { LycIcon, LycButton },
   props: {
     ...LycIcon.props,
     ...LycButton.props,

@@ -6,16 +6,19 @@ import i18n from '@/plugins/i18n';
 import firebaseApp from '@/plugins/firebase';
 import App from '@/App.vue';
 import '@/styles/_lycui.scss';
+import register from '@/components/global-register';
 
 const app = createApp(App);
-app.use(VueFire, {
-  firebaseApp,
-  modules: [
-    VueFireAuth(),
-  ],
-});
-app.use(router);
-app.use(pinia);
-app.use(i18n);
+register(app).then(() => {
+  app.use(VueFire, {
+    firebaseApp,
+    modules: [
+      VueFireAuth(),
+    ],
+  });
+  app.use(router);
+  app.use(pinia);
+  app.use(i18n);
 
-app.mount('#app');
+  app.mount('#app');
+});

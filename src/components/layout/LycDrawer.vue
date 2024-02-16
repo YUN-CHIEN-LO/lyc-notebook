@@ -24,42 +24,41 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, computed } from 'vue'
-import { LycIconButton } from '@/components/basic';
+import { ref, defineComponent, computed } from 'vue';
 import type { PropType } from 'vue';
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside } from '@vueuse/core';
 
 export default defineComponent({
-  name: "LycDrawer",
-  components: { LycIconButton },
+  name: 'LycDrawer',
   props: {
     modelValue: {
       type: Boolean as PropType<boolean>,
       default: false,
-    }
+    },
   },
   setup(props, { emit }) {
     const isOpen = computed({
       get() {
-        return props.modelValue
+        return props.modelValue;
       },
       set(val) {
-        emit("update:modelValue", val)
-      }
-    })
+        emit('update:modelValue', val);
+      },
+    });
 
-    const lycDrawerDom = ref(null)
+    const lycDrawerDom = ref(null);
 
-
-
+    /**
+     *
+     */
     function handleClose() {
-      isOpen.value = false
+      isOpen.value = false;
     }
 
-    onClickOutside(lycDrawerDom, () => handleClose())
+    onClickOutside(lycDrawerDom, () => handleClose());
     return { isOpen, lycDrawerDom, handleClose };
   },
-})
+});
 </script>
 
 <style scoped lang="scss">

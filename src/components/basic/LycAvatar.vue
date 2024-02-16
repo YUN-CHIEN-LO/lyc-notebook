@@ -13,7 +13,6 @@
 <script lang="ts">
 import { isEmpty } from 'lodash';
 import { computed, PropType, defineComponent } from 'vue';
-import LycIcon from '@/components/basic/LycIcon.vue';
 
 export default defineComponent({
   name: 'LycAvatar',
@@ -31,7 +30,6 @@ export default defineComponent({
     const hasUrl = computed(() => !isEmpty(props.url));
     return { hasUrl };
   },
-  components: { LycIcon },
 });
 </script>
 
