@@ -23,18 +23,38 @@
 </template>
 
 <script lang="ts">
+import type { PropType } from 'vue';
 import {
   computed, defineComponent, ref, Ref,
 } from 'vue';
 
 export default defineComponent({
   name: 'LycExpansion',
-  setup() {
-    const open = ref(false);
+  props: {
+    modelValue: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    readonly: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+  },
+  setup(props, { emit }) {
+    const open = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(val: boolean) {
+        if (props.readonly) return;
+        emit('update:modelValue', val);
+      },
+    });
     /**
      *
      */
     function handleToggle() {
+      if (props.readonly) return;
       open.value = !open.value;
     }
     const contentDom: Ref<HTMLDivElement | null> = ref(null);

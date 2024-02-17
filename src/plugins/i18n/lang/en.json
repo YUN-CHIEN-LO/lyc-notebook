@@ -38,6 +38,9 @@
   "ui": {
     "title": "Lyc Ui Library"
   },
+  "color": {
+    "title": "Color Pallette"
+  },
   "projects": {
     "title": "Side Projects"
   },

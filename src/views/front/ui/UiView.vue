@@ -5,6 +5,7 @@
         <RoutePanel color="primary" />
       </lyc-column>
     </lyc-row>
+    <router-view></router-view>
   </div>
 </template>
 

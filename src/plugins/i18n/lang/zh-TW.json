@@ -38,6 +38,9 @@
   "ui": {
     "title": "Lyc Ui 元件庫"
   },
+  "color": {
+    "title": "主題色與色票"
+  },
   "projects": {
     "title": "程式專案"
   },

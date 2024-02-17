@@ -2,10 +2,7 @@
   "hosting": {
     // "site": "lyc-notebook-49edb",
     "public": "dist",
-    "rewrites": [
-      { "source": "/access/**", "destination": "/index.html" },
-      { "source": "**", "destination": "/index.html" }
-    ],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }],
     // "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "predeploy": ["npm run build"]
   }

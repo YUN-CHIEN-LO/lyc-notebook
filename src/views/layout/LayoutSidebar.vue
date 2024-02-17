@@ -13,6 +13,8 @@
       <lyc-expansion
         v-for="route in frontRoutes"
         :key="route.name"
+        :model-value="isExpandRoute(route.name)"
+        readonly
       >
         <template #target>
           <lyc-button
@@ -26,7 +28,7 @@
           </lyc-button>
         </template>
         <lyc-button
-          v-for="childRoute in (route.children as RouteRecord[])"
+          v-for="childRoute in (route.children as RouteRecordRaw[])"
           :key="childRoute.name"
           class="w-100 tal "
           :color="isActiveRoute(childRoute.name as string)"
@@ -57,7 +59,7 @@ import frontRoutes from '@/router/routes/front';
 import { useI18n } from 'vue-i18n';
 import { useRouter, useRoute } from 'vue-router';
 import useLayoutStore from '@/stores/layout';
-import type { RouteRecord } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 const { t } = useI18n();
 // 使用 layout 倉儲
@@ -66,6 +68,14 @@ const layoutStore = useLayoutStore();
 const router = useRouter();
 // 使用 路由
 const route = useRoute();
+
+/**
+ *
+ * @param name
+ */
+function isExpandRoute(name: string): boolean {
+  return route.name === name || route.meta.parent === name;
+}
 
 /**
  *
