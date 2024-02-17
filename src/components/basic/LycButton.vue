@@ -77,7 +77,7 @@ export default defineComponent({
   cursor: pointer;
   outline: inherit;
   border-radius: g-unit(1);
-  height: g-unit(6);
+  min-height: g-unit(6);
   letter-spacing: 1px;
   @include flex($jc: center);
   box-sizing: border-box;

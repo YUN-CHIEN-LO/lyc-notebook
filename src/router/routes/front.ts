@@ -1,19 +1,13 @@
-import uiDemoRoutes from '@/router/routes/ui-demo';
+import projectsRoutes from '@/router/routes/projects';
+import resumeRoutes from '@/router/routes/resume';
+import tutorRoutes from '@/router/routes/tutor';
+import uiRoutes from '@/router/routes/ui';
 
 const frontRoutes = [
-  ...uiDemoRoutes,
-  // 主面板
-  {
-    path: 'home',
-    name: 'home',
-    component: () => import('@/views/front/HomeView.vue'),
-  },
-  // 登入頁面
-  {
-    path: 'login',
-    name: 'login',
-    component: () => import('@/views/front/LoginView.vue'),
-  },
+  ...projectsRoutes,
+  ...resumeRoutes,
+  ...tutorRoutes,
+  ...uiRoutes,
 ];
 
 export default frontRoutes;

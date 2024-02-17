@@ -16,10 +16,28 @@ const routes = [
     component: layout,
     redirect: '/home',
     children: [
+      // 主面板
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('@/views/front/home/HomeView.vue'),
+        meta: {
+          icon: 'mdiHome',
+        },
+      },
       // 權限路由
       ...accessRoutes,
       // 白名單路由
       ...frontRoutes,
+      // 登入頁面
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/front/LoginView.vue'),
+        meta: {
+          icon: 'mdiLogin',
+        },
+      },
       // 錯誤頁面
       {
         path: 'error',
@@ -28,6 +46,7 @@ const routes = [
       },
     ],
   },
+
   // 錯誤路由捕獲
   {
     path: '/:catchAll(.*)',
@@ -68,7 +87,7 @@ router.afterEach((to) => {
   const { name } = to;
   const documentTitle = name ? i18n.global.t(`${name as string}.title`) : 'x';
   Object.assign(document, {
-    title: `${i18n.global.t('system.projectName')} | ${name as string}| ${documentTitle}`,
+    title: `${i18n.global.t('system.projectName')} | ${documentTitle}`,
   });
 });
 

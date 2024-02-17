@@ -6,12 +6,18 @@ const accessRoutes = [
     path: 'dashboard',
     name: 'dashboard',
     component: () => import('@/views/access/DashboardView.vue'),
+    meta: {
+      icon: 'mdiPencil',
+    },
   },
   // 使用者設定
   {
     path: 'user',
     name: 'user',
     component: () => import('@/views/access/UserAccountView.vue'),
+    meta: {
+      icon: 'mdiUser',
+    },
   },
 ];
 

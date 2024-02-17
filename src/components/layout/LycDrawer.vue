@@ -1,9 +1,11 @@
 <template>
   <aside
     ref="lycDrawerDom"
-    :class="['lyc-drawer', {
-      'lyc-drawer--open': isOpen
-    }]"
+    :class="['lyc-drawer',
+      `lyc-drawer--${direction}`,
+      {
+        'lyc-drawer--open': isOpen,
+      }]"
   >
     <div class="lyc-drawer__header">
       <div class="lyc-drawer__header__title">
@@ -34,6 +36,13 @@ export default defineComponent({
     modelValue: {
       type: Boolean as PropType<boolean>,
       default: false,
+    },
+    direction: {
+      type: String as PropType<string>,
+      default: 'right',
+      validator(val: string): boolean {
+        return ['right', 'left'].includes(val);
+      },
     },
   },
   setup(props, { emit }) {
@@ -72,7 +81,7 @@ export default defineComponent({
 
   &__header {
     @include flex();
-    padding: s-unit(2) s-unit(2);
+    padding: g-unit(2) g-unit(2);
 
     &__title {
       flex: 1;
@@ -84,10 +93,16 @@ export default defineComponent({
   }
 
   &__content {
-    padding: s-unit(0) s-unit(2) s-unit(2);
+    padding: s-unit(0) g-unit(2) g-unit(2);
   }
 
-  transform: translateX(calc(100% + g-unit(4)));
+  &--right {
+    transform: translateX(calc(100% + g-unit(4)));
+  }
+
+  &--left {
+    transform: translateX(calc(-100% - g-unit(4)));
+  }
 
   @include transitions(transform 0.3s ease-in);
 

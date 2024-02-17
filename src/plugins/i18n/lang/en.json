@@ -29,10 +29,22 @@
   "home": {
     "title": "Welcome!"
   },
-  "access-dashboard": {
+  "dashboard": {
     "title": "Something exciting to share?"
   },
-  "access-userAccount": {
+  "user": {
     "title": "Settings"
+  },
+  "ui": {
+    "title": "Lyc Ui Library"
+  },
+  "projects": {
+    "title": "Side Projects"
+  },
+  "resume": {
+    "title": "Career Resume"
+  },
+  "tutor": {
+    "title": "Tutoring Resources"
   }
 }

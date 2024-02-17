@@ -19,7 +19,7 @@ export default defineComponent({
   props: {
     col: {
       type: Number as PropType<number>,
-      default: 6,
+      default: 12,
     },
     sm: {
       type: Number as PropType<number>,

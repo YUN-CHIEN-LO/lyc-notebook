@@ -16,6 +16,7 @@ const getState = () => ({
   windowWidth: 1200,
   windowSize: DeviceEnum.desktop,
   showDrawer: false,
+  showSidebar: false,
   systemAlert: undefined as LycLib.Alert,
 });
 
@@ -27,10 +28,17 @@ export default defineStore('layout', {
     // 取得 當前語系
     getLang: (state) => getEnumKeyByValue(LangEnum, state.lang),
     getWindowSize: (state) => getEnumKeyByValue(DeviceEnum, state.windowSize),
+    getIsMobile: (state) => state.device === DeviceEnum.mobile
+      || state.windowSize === DeviceEnum.mobile,
+    getIsDesktop: (state) => state.device === DeviceEnum.desktop
+      || state.windowSize === DeviceEnum.desktop,
   },
   actions: {
     setShowDrawer(show: boolean) {
       this.showDrawer = show;
+    },
+    setShowSidebar(show: boolean) {
+      this.showSidebar = show;
     },
     /**
      * 設置當前主題
@@ -81,6 +89,9 @@ export default defineStore('layout', {
      */
     toggleLang() {
       this.setLang((this.lang + 1) % getEnumCount(LangEnum));
+    },
+    toggleSidebar() {
+      this.setShowSidebar(!this.showSidebar);
     },
   },
 });

@@ -29,10 +29,22 @@
   "home": {
     "title": "歡迎光臨！"
   },
-  "access-dashboard": {
+  "dashboard": {
     "title": "今天想分享什麼呢？"
   },
-  "access-userAccount": {
+  "user": {
     "title": "設定"
+  },
+  "ui": {
+    "title": "Lyc Ui 元件庫"
+  },
+  "projects": {
+    "title": "程式專案"
+  },
+  "resume": {
+    "title": "求職履歷"
+  },
+  "tutor": {
+    "title": "高中家教"
   }
 }

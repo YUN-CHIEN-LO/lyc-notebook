@@ -107,7 +107,6 @@ export default defineComponent({
 @mixin setColor($type) {
   border-color: color($type, 4);
   background-color: color($type, 1);
-  // @include shadow(0px 0px s-unit(1) s-unit(0) color($type, 6));
 
   &>.lyc-icon {
     color: color($type, 4);
@@ -116,10 +115,11 @@ export default defineComponent({
 
 .lyc-alert {
   width: g-unit(40);
-  max-width: 100%;
+  max-width: calc(100vw - g-unit(2));
   padding: g-unit(1) g-unit(2);
   border-radius: g-unit(1);
   margin-bottom: g-unit(2);
+  box-sizing: border-box;
   overflow: hidden;
   background-color: color(backdrop, 4);
   border: solid s-unit(0.25);

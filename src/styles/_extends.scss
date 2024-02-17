@@ -173,6 +173,19 @@
 .w-100 {
   width: 100%;
 }
+.df {
+  @include flex();
+}
+.jcsb {
+  justify-content: space-between;
+}
+.aife {
+  align-items: flex-end;
+}
+
+.fww {
+  flex-wrap: wrap;
+}
 
 @each $name
   in ("primary", "secondary", "backdrop", "text", "dark", "light", "alert")

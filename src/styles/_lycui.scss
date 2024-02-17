@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap");
 
 html,
 body {
@@ -7,13 +7,14 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  font-family: 'Noto Sans TC','Roboto', sans-serif;
+  font-family: "Noto Sans TC", "Roboto", sans-serif;
+  background-color: color(backdrop);
 }
 
 #lyc-app {
   background-color: color(backdrop);
   height: 100vh;
-  overflow: auto;
+  overflow: hidden;
   box-sizing: border-box;
   font-size: $font-size;
   color: color(dark);
@@ -28,6 +29,9 @@ body {
     outline: none;
     -webkit-text-fill-color: var(--dark);
     box-shadow: inset 0 0 0 1000px var(--white);
+  }
+  h1 {
+    font-size: fz(10);
   }
 
   .lyc-tooltip {
@@ -52,18 +56,36 @@ body {
   }
 
   .lyc-container {
-    flex: 1;
-    overflow: auto;
+    width: 100%;
+    height: calc(100% - $navbar-height);
+    box-sizing: border-box;
     @include small-device {
-      padding: s-unit(2) s-unit(2);
+      min-width: 300px;
     }
 
     @include medium-device {
-      padding: s-unit(2) s-unit(10);
+      min-width: 768px;
     }
 
     @include large-device {
-      padding: s-unit(2) s-unit(10);
+      min-width: 992px;
+    }
+  }
+
+  .lyc-main {
+    flex: 1;
+    overflow: auto;
+    align-self: stretch;
+    @include small-device {
+      padding: 0 s-unit(2);
+    }
+
+    @include medium-device {
+      padding: 0 s-unit(10);
+    }
+
+    @include large-device {
+      padding: 0 s-unit(10);
     }
   }
 }

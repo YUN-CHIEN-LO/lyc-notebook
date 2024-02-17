@@ -22,8 +22,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .lyc-navbar {
-  padding: s-unit(2) s-unit(2);
-
+  padding: 0 s-unit(3);
   box-sizing: border-box;
   flex-grow: 0;
   @include flex();
