@@ -3,7 +3,7 @@ import { App, ComponentOptions } from 'vue';
 export default async (app: App<Element>): Promise<void> => {
   // Grab all components in `/src/lib/components/` that start with "Base"
   const components = import.meta.glob('../**/Lyc*.vue');
-  Object.entries(components).forEach(async ([path, component]) => {
+  const promiseChain = Object.entries(components).map(async ([path, component]) => {
     const pathSplit = path.split('/');
     const fileName = pathSplit[pathSplit.length - 1].split('.vue')[0].split('Lyc')[1];
 
@@ -19,4 +19,6 @@ export default async (app: App<Element>): Promise<void> => {
       app.component(`Lyc${fileName}`, resolvedComponent.default);
     }
   });
+
+  await Promise.all(promiseChain);
 };

@@ -23,13 +23,16 @@
     "logout": "Log Out",
     "reset": "Reset"
   },
-  "dashboard": {
+  "error": {
+    "title": "Something went wrong..."
+  },
+  "home": {
     "title": "Welcome!"
   },
   "access-dashboard": {
     "title": "Something exciting to share?"
   },
-  "error": {
-    "title": "Something went wrong..."
+  "access-userAccount": {
+    "title": "Settings"
   }
 }

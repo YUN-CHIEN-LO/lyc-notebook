@@ -7,10 +7,10 @@
       :form="form"
     >
       <h1 class="tac">
-        {{ $t('login.title') }}
+        {{ t('login.title') }}
       </h1>
       <lyc-form-item
-        :label="$t('login.email')"
+        :label="t('login.email')"
         name="email"
       >
         <LycInput
@@ -22,7 +22,7 @@
         />
       </lyc-form-item>
       <lyc-form-item
-        :label="$t('login.password')"
+        :label="t('login.password')"
         name="password"
       >
         <lyc-input
@@ -50,7 +50,7 @@
         color="primary"
         @click.prevent="handleSubmit"
       >
-        {{ $t('login.login') }}
+        {{ t('login.login') }}
       </lyc-button>
     </lyc-form>
   </div>
@@ -67,12 +67,11 @@ import { useI18n } from 'vue-i18n';
 import useUserStore from '@/stores/user';
 import useLayoutStore from '@/stores/layout';
 import { useRouter } from 'vue-router';
-import { AccessRoute, getAccessName } from '@/router';
 
 const router = useRouter();
 
 // 使用多語系
-const i18n = useI18n();
+const { t } = useI18n();
 // 使用 使用者 倉儲
 const userStore = useUserStore();
 // 使用 layout 倉儲
@@ -94,14 +93,14 @@ const rules = {
   email: // 信箱
     (value: string): (boolean | string) => {
       // 不可空白
-      if (!value.length) return i18n.t('validation.empty');
+      if (!value.length) return t('validation.empty');
       // 格式錯誤
-      if (!/^[\w.]+@([\w]+\.)+[\w]{2,4}$/.test(value)) return i18n.t('validation.invalidFormat');
+      if (!/^[\w.]+@([\w]+\.)+[\w]{2,4}$/.test(value)) return t('validation.invalidFormat');
       return true;
     },
   password: // 密碼
     // 不可空白
-    (value: string): (boolean | string) => (value.length ? true : i18n.t('validation.empty')),
+    (value: string): (boolean | string) => (value.length ? true : t('validation.empty')),
 } as LycLib.Rules;
 
 /**
@@ -119,17 +118,17 @@ async function handleSubmit() {
     // 登入失敗
     if (!isLogin) {
       formDom.value.error({
-        email: i18n.t('validation.invalidAccount'),
-        password: i18n.t('validation.invalidAccount'),
+        email: t('validation.invalidAccount'),
+        password: t('validation.invalidAccount'),
       });
       // 拋出錯誤
       layoutStore.systemAlert = {
-        text: i18n.t('validation.invalidAccount'),
+        text: t('validation.invalidAccount'),
         type: 'alert',
       };
       throw new Error();
     }
-    router.push({ name: getAccessName(AccessRoute.dashboard) });
+    router.push({ name: 'dashboard' });
   } catch (error) {
     if (userStore.getIsLogin) {
       // 登出使用者

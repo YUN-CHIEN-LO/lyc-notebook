@@ -14,7 +14,7 @@
       class="w-100 tal"
       @click="handleToggleLang"
     >
-      {{ $t(`lang.${layoutStore.getLang}`) }}
+      {{ t(`lang.${layoutStore.getLang}`) }}
     </lyc-button>
     <!-- 切換主題 -->
     <lyc-button
@@ -23,7 +23,7 @@
       class="w-100 tal"
       @click="handleToggleTheme"
     >
-      {{ $t(`system.${layoutStore.getTheme}`) }}
+      {{ t(`system.${layoutStore.getTheme}`) }}
     </lyc-button>
 
     <!-- 登出使用者 -->
@@ -34,7 +34,7 @@
       class="w-100 tal"
       @click.prevent="handleLogout"
     >
-      {{ $t('login.logout') }}
+      {{ t('login.logout') }}
     </lyc-button>
 
     <!-- 登入使用者 -->
@@ -45,7 +45,7 @@
       prefix-icon="mdiLogin"
       @click.prevent="handleLogin"
     >
-      {{ $t('login.login') }}
+      {{ t('login.login') }}
     </lyc-button>
   </lyc-drawer>
 </template>
@@ -56,9 +56,6 @@ import useUserStore from '@/stores/user';
 import useLayoutStore from '@/stores/layout';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import {
-  AccessRoute, FrontRoute, getAccessName, getFrontName,
-} from '@/router';
 
 // 使用 使用者 倉儲
 const userStore = useUserStore();
@@ -69,7 +66,7 @@ const router = useRouter();
 // 使用 路由
 const route = useRoute();
 // 使用多語系
-const i18nInstance = useI18n();
+const { t, locale } = useI18n();
 
 const showMoreDrawer = computed({
   get() {
@@ -82,7 +79,7 @@ const showMoreDrawer = computed({
 
 // 是否顯示登入
 const showLogin = computed(() => !userStore.getIsLogin
-  && route.name !== getFrontName(FrontRoute.login));
+  && route.name !== 'login');
 
 /**
  * 當 切換主題
@@ -96,7 +93,7 @@ function handleToggleTheme() {
  */
 function handleToggleLang() {
   layoutStore.toggleLang();
-  i18nInstance.locale.value = layoutStore.getLang;
+  locale.value = layoutStore.getLang;
 }
 
 /**
@@ -104,14 +101,14 @@ function handleToggleLang() {
  */
 function handleLogout() {
   userStore.logoutUser();
-  router.push({ name: getFrontName(FrontRoute.login) });
+  router.push({ name: 'login' });
 }
 
 /**
  * 當 登入使用者
  */
 function handleLogin() {
-  router.push({ name: getFrontName(FrontRoute.login) });
+  router.push({ name: 'login' });
 }
 
 /**
@@ -119,7 +116,7 @@ function handleLogin() {
  */
 function handleClickAvatar() {
   showMoreDrawer.value = false;
-  router.push({ name: getAccessName(AccessRoute.userAccount) });
+  router.push({ name: 'user' });
 }
 </script>
 

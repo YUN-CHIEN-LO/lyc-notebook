@@ -3,12 +3,9 @@ import lg from '@/plugins/local-storage';
 import { StorageBool, StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
 import useUserStore from '@/stores/user';
-import { accessRoutes } from '@/router/routes/access';
-import {
-  FrontRoute, frontRoutes, getFrontName, getFrontPath,
-} from '@/router/routes/front';
+import accessRoutes, { isAccessRoute } from '@/router/routes/access';
+import frontRoutes from '@/router/routes/front';
 import i18n from '@/plugins/i18n';
-import { isAccessRoute } from '@/router/route-helper';
 import layout from '@/views/layout/LayoutView.vue';
 
 // 路由清單
@@ -17,7 +14,7 @@ const routes = [
     path: '/',
     name: 'root',
     component: layout,
-    redirect: `/${getFrontPath(FrontRoute.dashboard)}`,
+    redirect: '/home',
     children: [
       // 權限路由
       ...accessRoutes,
@@ -56,7 +53,7 @@ router.beforeEach((to) => {
   const saveLogin = (lg.get(StorageEnum.LOGIN));
   if (saveLogin !== `${StorageBool.true}`
     && isAccessRoute(to.name)) {
-    return { name: getFrontName(FrontRoute.login) };
+    return { name: 'login' };
   }
 
   layoutStore.setShowDrawer(false);
@@ -79,4 +76,3 @@ export default router;
 
 export * from '@/router/routes/access';
 export * from '@/router/routes/front';
-export * from '@/router/route-helper';

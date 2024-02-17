@@ -12,28 +12,27 @@
         v-show="isTablet"
         class="my-g-0 mx-g-3"
       >
-        {{ $t("system.projectName") }} | {{ $t(routeTitle) }}
+        {{ t("system.projectName") }} | {{ t(routeTitle) }}
       </p>
       <template #tools>
         <!-- 進入後台 -->
         <LycIconButton
-          v-if="showAccess"
           icon="mdiPencil"
-          v-lyc-tooltip="$t('system.toAccess')"
+          v-lyc-tooltip="t('system.toAccess')"
           @click="handleAccessDashboard"
         />
         <!-- 切換語系 -->
         <LycIconButton
           v-if="isTablet"
           icon="mdiTranslate"
-          v-lyc-tooltip="$t(`lang.${layoutStore.getLang}`)"
+          v-lyc-tooltip="t(`lang.${layoutStore.getLang}`)"
           @click="handleToggleLang"
         />
         <!-- 切換主題 -->
         <LycIconButton
           v-if="isDesktop"
           icon="mdiThemeLightDark"
-          v-lyc-tooltip="$t(`system.${layoutStore.getTheme}`)"
+          v-lyc-tooltip="t(`system.${layoutStore.getTheme}`)"
           @click="handleToggleTheme"
         />
 
@@ -41,14 +40,14 @@
         <LycAvatar
           v-if="userStore.getIsLogin"
           class="ml-g-1"
-          v-lyc-tooltip="$t('system.moreInfo')"
+          v-lyc-tooltip="t('system.moreInfo')"
           :url="userStore.user.photoURL"
           :alt="userStore.user.displayName"
           @click="handleMoreDrawer"
         />
         <LycIconButton
           v-else
-          v-lyc-tooltip="$t('system.moreInfo')"
+          v-lyc-tooltip="t('system.moreInfo')"
           icon="mdiMenu"
           @click="handleMoreDrawer"
         />
@@ -74,19 +73,12 @@ import { useLycTooltip } from '@/components/directives';
 import {
   computed, onMounted, onBeforeUnmount,
 } from 'vue';
-import {
-  AccessRoute,
-  FrontRoute,
-  getAccessName,
-  getFrontName,
-  isAccessRoute,
-} from '@/router';
 import { DeviceEnum } from '@/types';
 import LayoutDrawer from '@/views/layout/LayoutDrawer.vue';
 
 const vLycTooltip = useLycTooltip();
 // 使用多語系
-const i18nInstance = useI18n();
+const { t, locale } = useI18n();
 // 使用 使用者 倉儲
 const userStore = useUserStore();
 // 使用 layout 倉儲
@@ -98,10 +90,6 @@ const route = useRoute();
 // 路由名稱
 const routeTitle = computed(() => `${route.name as string}.title`);
 
-// 是否顯示後台
-const showAccess = computed(
-  () => !isAccessRoute(route.name),
-);
 const isTablet = computed(() => [DeviceEnum.desktop, DeviceEnum.tablet]
   .includes(layoutStore.windowSize));
 const isDesktop = computed(() => [DeviceEnum.desktop].includes(layoutStore.windowSize));
@@ -125,15 +113,15 @@ function handleToggleTheme() {
  */
 function handleToggleLang() {
   layoutStore.toggleLang();
-  i18nInstance.locale.value = layoutStore.getLang;
+  locale.value = layoutStore.getLang;
 }
 
 /**
  * 當 進入後台
  */
 function handleAccessDashboard() {
-  if (userStore.getIsLogin) router.push({ name: getAccessName(AccessRoute.dashboard) });
-  else router.push({ name: getFrontName(FrontRoute.login) });
+  if (userStore.getIsLogin) router.push({ name: 'dashboard' });
+  else router.push({ name: 'login' });
 }
 
 /**

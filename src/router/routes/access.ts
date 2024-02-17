@@ -1,30 +1,27 @@
-import { getEnumKeyByValue } from '@/utils';
+import type { RouteRecordName } from 'vue-router';
 
-export enum AccessRoute {
-  'root',
-  'dashboard',
-  'userAccount'
-}
-
-export function getAccessName(key: AccessRoute): string {
-  return `access-${getEnumKeyByValue(AccessRoute, key)}`
-}
-
-export function getAccessPath(key: AccessRoute): string {
-  return `/access-${getEnumKeyByValue(AccessRoute, key)}`
-}
-
-export const accessRoutes = [
+const accessRoutes = [
   // 主面板
   {
-    path: getAccessPath(AccessRoute.dashboard),
-    name: getAccessName(AccessRoute.dashboard),
+    path: 'dashboard',
+    name: 'dashboard',
     component: () => import('@/views/access/DashboardView.vue'),
   },
   // 使用者設定
   {
-    path: getAccessPath(AccessRoute.userAccount),
-    name: getAccessName(AccessRoute.userAccount),
+    path: 'user',
+    name: 'user',
     component: () => import('@/views/access/UserAccountView.vue'),
-  }
-]
+  },
+];
+
+/**
+ * 是否為權限路由
+ * @param {RouteRecordName} name - 路由名稱
+ * @returns {boolean} - 是否為權限路由
+ */
+export function isAccessRoute(name: RouteRecordName | null | undefined) {
+  return accessRoutes.some((route) => route.name === (name as string));
+}
+
+export default accessRoutes;
