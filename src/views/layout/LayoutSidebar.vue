@@ -10,17 +10,35 @@
       >
         {{ t(`home.title`) }}
       </lyc-button>
-      <lyc-button
+      <lyc-expansion
         v-for="route in frontRoutes"
         :key="route.name"
-        :prefixIcon="route.meta?.icon"
-        class="w-100 tal"
-        :color="isActiveRoute(route.name)"
-        vertical
-        @click="handleRoute(route.name)"
       >
-        {{ t(`${route.name}.title`) }}
-      </lyc-button>
+        <template #target>
+          <lyc-button
+            :prefixIcon="route.meta?.icon"
+            class="w-100 tal"
+            :color="isActiveRoute(route.name)"
+            vertical
+            @click="handleRoute(route.name)"
+          >
+            {{ t(`${route.name}.title`) }}
+          </lyc-button>
+        </template>
+        <lyc-button
+          v-for="childRoute in (route.children as RouteRecord[])"
+          :key="childRoute.name"
+          class="w-100 tal "
+          :color="isActiveRoute(childRoute.name as string)"
+          vertical
+          @click="handleRoute(childRoute.name as string)"
+        >
+          <span class="ml-s-7">
+            {{ t(`${childRoute.name as string}.title`) }}
+          </span>
+        </lyc-button>
+      </lyc-expansion>
+
       <lyc-button
         prefixIcon="mdiPencil"
         class="w-100 tal"
@@ -39,6 +57,7 @@ import frontRoutes from '@/router/routes/front';
 import { useI18n } from 'vue-i18n';
 import { useRouter, useRoute } from 'vue-router';
 import useLayoutStore from '@/stores/layout';
+import type { RouteRecord } from 'vue-router';
 
 const { t } = useI18n();
 // 使用 layout 倉儲
@@ -53,7 +72,9 @@ const route = useRoute();
  * @param name
  */
 function isActiveRoute(name: string): string {
-  return route.name === name ? 'text' : 'default';
+  if (route.name === name) return 'primary';
+  if (route.meta.parent === name) return 'text';
+  return 'default';
 }
 
 /**

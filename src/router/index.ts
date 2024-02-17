@@ -75,7 +75,10 @@ router.beforeEach((to) => {
     return { name: 'login' };
   }
 
+  const saveSidebar = lg.get(StorageEnum.SIDEBAR) === `${StorageBool.true}`;
+
   layoutStore.setShowDrawer(false);
+  layoutStore.setShowSidebar(layoutStore.getIsMobile ? false : saveSidebar);
 
   const userStore = useUserStore();
 

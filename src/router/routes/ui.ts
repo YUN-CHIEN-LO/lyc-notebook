@@ -7,5 +7,15 @@ export default [
     meta: {
       icon: 'mdiPuzzle',
     },
+    children: [
+      {
+        path: 'color',
+        name: 'color',
+        component: () => import('@/views/front/ui/ColorView.vue'),
+        meta: {
+          parent: 'ui',
+        },
+      },
+    ],
   },
 ];

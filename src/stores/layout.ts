@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { getEnumKeyByValue, getEnumCount } from '@/utils';
 import lg from '@/plugins/local-storage';
 import {
-  ThemeEnum, StorageEnum, LangEnum, DeviceEnum,
+  ThemeEnum, StorageEnum, LangEnum, DeviceEnum, StorageBool,
 } from '@/types';
 
 const getState = () => ({
@@ -39,6 +39,7 @@ export default defineStore('layout', {
     },
     setShowSidebar(show: boolean) {
       this.showSidebar = show;
+      lg.set(StorageEnum.SIDEBAR, show ? StorageBool.true : StorageBool.false);
     },
     /**
      * 設置當前主題

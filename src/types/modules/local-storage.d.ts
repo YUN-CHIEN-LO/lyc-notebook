@@ -3,6 +3,7 @@ export enum StorageEnum {
   'THEME', // -------------- 主題
   'LANG', // --------------- 語系
   'LOGIN', // -------------- 登入狀態
+  'SIDEBAR', // ------------ 開啟側邊欄
 }
 
 export enum StorageBool {
