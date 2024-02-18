@@ -1,10 +1,6 @@
 <template>
   <div>
-    <lyc-row>
-      <lyc-column>
-        <RoutePanel color="primary" />
-      </lyc-column>
-    </lyc-row>
+    <RoutePanel color="primary" />
     <router-view v-slot="{ Component }">
       <transition
         name="route"

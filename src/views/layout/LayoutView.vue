@@ -4,6 +4,7 @@
     :data-theme="layoutStore.getTheme"
   >
     <lyc-navbar>
+      {{ layoutStore.getIsDesktop }}/{{ layoutStore.getIsMobile }}
       <LycIconButton
         icon="lycLogo"
         @click="handleToggleSidebar"
@@ -67,7 +68,10 @@
           <LayoutSidebar style="width: 360px" />
         </aside>
       </transition>
-      <main class="lyc-main">
+      <main :class="['lyc-main', {
+        'ml-g-4': !showSidebar && !layoutStore.getIsMobile,
+        'mr-g-4': !showPageList && !layoutStore.getIsMobile
+      }]">
         <router-view v-slot="{ Component }">
           <transition
             name="route"
@@ -93,7 +97,7 @@
     <LayoutDrawer />
 
     <lyc-drawer
-      v-if="!isTablet"
+      v-if="layoutStore.getIsMobile"
       v-model="showSidebarDrawer"
       direction="left"
     >
@@ -117,7 +121,6 @@ import {
   computed, onMounted, onBeforeUnmount,
   watch,
 } from 'vue';
-import { DeviceEnum } from '@/types';
 import LayoutDrawer from '@/views/layout/LayoutDrawer.vue';
 import LayoutSidebar from '@/views/layout/LayoutSidebar.vue';
 import LayoutPageList from '@/views/layout/LayoutPageList.vue';
@@ -135,9 +138,6 @@ const router = useRouter();
 const route = useRoute();
 // 路由名稱
 const routeTitle = computed(() => `${route.name as string}.title`);
-
-const isTablet = computed(() => [DeviceEnum.desktop, DeviceEnum.tablet]
-  .includes(layoutStore.windowSize));
 
 const showSidebar = computed(() => layoutStore.showSidebar && !layoutStore.getIsMobile);
 const showPageList = computed(() => layoutStore.showPageList && !layoutStore.getIsMobile);
@@ -189,7 +189,8 @@ function handleMoreDrawer() {
 }
 
 watch(() => layoutStore.getIsDesktop, (value: boolean): void => {
-  if (value) layoutStore.setShowSidebar(true);
+  console.log('xxx', value);
+  if (!value) layoutStore.setShowSidebar(false);
 });
 
 onMounted(() => {

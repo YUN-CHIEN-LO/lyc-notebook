@@ -2,14 +2,14 @@
   <lyc-card
     :color="color ?? 'default'"
     :clickable="clickable"
-    class="home-panel"
+    :class="['home-panel', { 'home-panel--fix': fix }]"
     @click="handleClick"
   >
-    <h1 class="home-panel__title"> {{ t(`${name ?? `${String(route.name)}.title`}`) }} </h1>
+    <h1 class="home-panel__title"> {{ t(`${title ?? `${String(route.name)}.title`}`) }} </h1>
     <LycIcon
       class="home-panel__icon"
       :icon="icon ?? route.meta.icon"
-      :font-size="8"
+      :font-size="fix ? 2 : 8"
     />
   </lyc-card>
 </template>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { useRouter, useRoute } from 'vue-router';
 import type { PropType } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import useLayoutStore from '@/stores/layout';
 import { useI18n } from 'vue-i18n';
 
@@ -26,6 +26,10 @@ export default defineComponent({
   props: {
     // 目標路由
     name: {
+      type: String as PropType<string>,
+      default: null,
+    },
+    title: {
       type: String as PropType<string>,
       default: null,
     },
@@ -40,6 +44,10 @@ export default defineComponent({
       default: null,
     },
     clickable: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    scrollFix: {
       type: Boolean as PropType<boolean>,
       default: false,
     },
@@ -59,9 +67,13 @@ export default defineComponent({
       if (!layoutStore.getIsMobile) layoutStore.setShowSidebar(true);
       router.push({ name: props.name ?? route.name });
     }
+
+    const fix = computed(() => props.scrollFix);
+
     return {
       t,
       route,
+      fix,
       handleClick, // 當 點擊面板
     };
   },
@@ -92,8 +104,22 @@ export default defineComponent({
   }
 
   &__icon {
-    @include transitions(transform 0.1s ease-in-out)
+    @include transitions(transform 0.1s ease-in-out);
+    margin-right: s-unit(4);
   }
 
+  &--fix {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    border-radius: 0;
+    padding: s-unit(1);
+
+    &>.home-panel__title {
+      font-size: $base-font ;
+      margin: 0;
+      margin-left: s-unit(2);
+    }
+  }
 }
 </style>

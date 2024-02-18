@@ -75,10 +75,12 @@ router.beforeEach((to) => {
     return { name: 'login' };
   }
 
-  const saveSidebar = lg.get(StorageEnum.SIDEBAR) === `${StorageBool.true}`;
+  // const saveSidebar = lg.get(StorageEnum.SIDEBAR) === `${StorageBool.true}`;
 
-  layoutStore.setShowDrawer(false);
-  layoutStore.setShowSidebar(layoutStore.getIsMobile ? false : saveSidebar);
+  // layoutStore.setShowDrawer(false);
+  // layoutStore.setShowSidebar(layoutStore.getIsMobile ? false : saveSidebar);
+
+  layoutStore.setShowSidebar(!layoutStore.getIsMobile);
 
   const userStore = useUserStore();
 

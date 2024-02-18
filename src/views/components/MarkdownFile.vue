@@ -1,23 +1,11 @@
 <template>
-  <div>
-    <lyc-row>
-      <lyc-column>
-        <RoutePanel
-          color="primary"
-          :name="pageTitle"
-          :icon="pageIcon"
-        />
-      </lyc-column>
-    </lyc-row>
-    <div v-html="markdownContent"></div>
-  </div>
+  <div v-html="markdownContent"></div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import MarkdownIt from 'markdown-it';
-import RoutePanel from '@/views/components/RoutePanel.vue';
 
 const md = new MarkdownIt({
   html: true, // Enable HTML tags in the Markdown content
@@ -42,6 +30,8 @@ const fetchMarkdownContent = async (filePath: string): Promise<string> => {
   }
 };
 
+const emit = defineEmits(['load']);
+
 const renderFile = async () => {
   try {
     const markdownFile = await fetchMarkdownContent(`src/assets/markdown/${route.params.filename}.md`);
@@ -51,10 +41,17 @@ const renderFile = async () => {
       const [, matchedPageTitle, matchedPageIcon] = match;
       pageTitle.value = matchedPageTitle;
       pageIcon.value = matchedPageIcon;
+      emit('load', {
+        title: matchedPageTitle,
+        icon: matchedPageIcon,
+      });
     } else {
-      pageTitle.value = route.name as string;
-      pageIcon.value = route.meta.icon as string;
+      emit('load', {
+        title: route.name as string,
+        icon: route.meta.icon as string,
+      });
     }
+
     const markdownText = markdownFile.replace(regex, '');
     markdownContent.value = md.render(markdownText);
   } catch (error) {

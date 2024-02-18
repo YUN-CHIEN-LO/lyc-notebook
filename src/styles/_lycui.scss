@@ -76,17 +76,7 @@ body {
     flex: 1;
     overflow: auto;
     align-self: stretch;
-    @include small-device {
-      padding: 0 s-unit(2);
-    }
-
-    @include medium-device {
-      padding: 0 s-unit(10);
-    }
-
-    @include large-device {
-      padding: 0 s-unit(10);
-    }
+    padding: 0 s-unit(2);
   }
 }
 

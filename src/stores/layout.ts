@@ -29,10 +29,14 @@ export default defineStore('layout', {
     // 取得 當前語系
     getLang: (state) => getEnumKeyByValue(LangEnum, state.lang),
     getWindowSize: (state) => getEnumKeyByValue(DeviceEnum, state.windowSize),
-    getIsMobile: (state) => state.device === DeviceEnum.mobile
-      || state.windowSize === DeviceEnum.mobile,
-    getIsDesktop: (state) => state.device === DeviceEnum.desktop
-      || state.windowSize === DeviceEnum.desktop,
+    getIsMobile: (state) => {
+      if (state.device === DeviceEnum.mobile) return true;
+      return state.windowSize === DeviceEnum.mobile;
+    },
+    getIsDesktop: (state) => {
+      if (state.device !== DeviceEnum.desktop) return false;
+      return state.windowSize === DeviceEnum.desktop;
+    },
   },
   actions: {
     setShowDrawer(show: boolean) {
@@ -83,6 +87,8 @@ export default defineStore('layout', {
       if (width < 768) this.windowSize = DeviceEnum.mobile;
       else if (width < 992) this.windowSize = DeviceEnum.tablet;
       else this.windowSize = DeviceEnum.desktop;
+
+      console.log('this.windowSize', this.windowSize, this.getIsDesktop);
     },
     /**
      * 切換當前主題

@@ -26,7 +26,8 @@
       >
         <RoutePanel
           :color="isNotebookRoute(route.name) ? 'primary' : 'secondary'"
-          :name="`${route.name}.title`"
+          :name="route.name"
+          :title="`${route.name}.title`"
           :icon="route.meta?.icon"
           clickable
         />
@@ -34,6 +35,15 @@
       <lyc-column>
         <lyc-card>
           <ol>
+            <li>loading</li>
+            <li>alert</li>
+            <li>user page</li>
+            <li>loading</li>
+            <li>alert</li>
+            <li>user page</li>
+            <li>loading</li>
+            <li>alert</li>
+            <li>user page</li>
             <li>loading</li>
             <li>alert</li>
             <li>user page</li>

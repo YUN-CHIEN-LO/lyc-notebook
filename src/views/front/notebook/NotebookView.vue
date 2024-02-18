@@ -1,10 +1,12 @@
 <template>
   <div>
-    <lyc-row>
-      <lyc-column>
-        <RoutePanel color="primary" />
-      </lyc-column>
-    </lyc-row>
+    <RoutePanel
+      color="primary"
+      :scrollFix="isPage"
+      :title="page.title ?? `${String(route.name)}.title`"
+      :icon="page.icon ?? `${route.meta.icon}`"
+      @click="handleClick"
+    />
 
     <router-view v-slot="{ Component }">
       <transition
@@ -14,6 +16,7 @@
         <component
           :is="Component"
           :key="(route.params.filename as string)"
+          @load="handleLoad"
         />
       </transition>
     </router-view>
@@ -22,7 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onBeforeUnmount } from 'vue';
+import {
+  onBeforeMount, onBeforeUnmount, reactive,
+  computed,
+} from 'vue';
 import RoutePanel from '@/views/components/RoutePanel.vue';
 import useLayoutStore from '@/stores/layout';
 import { useRoute } from 'vue-router';
@@ -30,6 +36,28 @@ import { useRoute } from 'vue-router';
 // 使用 layout 倉儲
 const layoutStore = useLayoutStore();
 const route = useRoute();
+const page = reactive({ title: null, icon: null });
+
+const isPage = computed(() => !!route.params.filename);
+
+/**
+ *
+ * @param pageInfo
+ * @param pageInfo.title
+ * @param pageInfo.icon
+ */
+function handleLoad(pageInfo: { title: string; icon: string }) {
+  Object.assign(page, pageInfo);
+}
+
+/**
+ *
+ */
+function handleClick() {
+  if (isPage.value) {
+    layoutStore.setShowPageList(!layoutStore.showPageList);
+  }
+}
 
 onBeforeMount(async () => {
   layoutStore.setShowPageList(true);
