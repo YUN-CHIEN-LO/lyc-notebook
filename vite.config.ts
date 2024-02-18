@@ -44,6 +44,7 @@ function setConfig(env) {
         brotliSize: true,
       })],
     base: './',
+    assetsInclude: ['**/*.md'],
     css: {
       preprocessorOptions: {
         scss: {
