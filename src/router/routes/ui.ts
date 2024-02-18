@@ -14,6 +14,7 @@ export default [
         component: () => import('@/views/front/ui/ColorView.vue'),
         meta: {
           parent: 'ui',
+          sidebar: true,
         },
       },
     ],

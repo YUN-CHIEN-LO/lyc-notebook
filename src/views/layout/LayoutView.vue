@@ -60,7 +60,10 @@
         mode="out-in"
         name="sidebar"
       >
-        <aside v-if="showSidebar">
+        <aside
+          v-if="showSidebar"
+          aria-label="sidebar"
+        >
           <LayoutSidebar style="width: 360px" />
         </aside>
       </transition>
@@ -74,9 +77,21 @@
           </transition>
         </router-view>
       </main>
+      <transition
+        mode="out-in"
+        name="sidebar"
+      >
+        <aside
+          v-if="showPageList"
+          aria-label="page-list"
+        >
+          <LayoutPageList style="width: 360px" />
+        </aside>
+      </transition>
     </div>
 
     <LayoutDrawer />
+
     <lyc-drawer
       v-if="!isTablet"
       v-model="showSidebarDrawer"
@@ -105,6 +120,7 @@ import {
 import { DeviceEnum } from '@/types';
 import LayoutDrawer from '@/views/layout/LayoutDrawer.vue';
 import LayoutSidebar from '@/views/layout/LayoutSidebar.vue';
+import LayoutPageList from '@/views/layout/LayoutPageList.vue';
 
 const vLycTooltip = useLycTooltip();
 // 使用多語系
@@ -124,6 +140,7 @@ const isTablet = computed(() => [DeviceEnum.desktop, DeviceEnum.tablet]
   .includes(layoutStore.windowSize));
 
 const showSidebar = computed(() => layoutStore.showSidebar && !layoutStore.getIsMobile);
+const showPageList = computed(() => layoutStore.showPageList && !layoutStore.getIsMobile);
 const showSidebarDrawer = computed({
   get() {
     return layoutStore.showSidebar && layoutStore.getIsMobile;

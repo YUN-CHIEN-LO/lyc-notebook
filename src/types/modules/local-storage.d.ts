@@ -4,6 +4,7 @@ export enum StorageEnum {
   'LANG', // --------------- 語系
   'LOGIN', // -------------- 登入狀態
   'SIDEBAR', // ------------ 開啟側邊欄
+  'PAGE_LIST'
 }
 
 export enum StorageBool {

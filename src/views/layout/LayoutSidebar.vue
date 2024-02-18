@@ -28,7 +28,8 @@
           </lyc-button>
         </template>
         <lyc-button
-          v-for="childRoute in (route.children as RouteRecordRaw[])"
+          v-for="childRoute in (route.children as RouteRecordRaw[])
+            .filter(({ meta }) => meta?.sidebar)"
           :key="childRoute.name"
           class="w-100 tal "
           :color="isActiveRoute(childRoute.name as string)"

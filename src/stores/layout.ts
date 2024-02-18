@@ -17,6 +17,7 @@ const getState = () => ({
   windowSize: DeviceEnum.desktop,
   showDrawer: false,
   showSidebar: false,
+  showPageList: false,
   systemAlert: undefined as LycLib.Alert,
 });
 
@@ -40,6 +41,10 @@ export default defineStore('layout', {
     setShowSidebar(show: boolean) {
       this.showSidebar = show;
       lg.set(StorageEnum.SIDEBAR, show ? StorageBool.true : StorageBool.false);
+    },
+    setShowPageList(show: boolean) {
+      this.showPageList = show;
+      lg.set(StorageEnum.PAGE_LIST, show ? StorageBool.true : StorageBool.false);
     },
     /**
      * 設置當前主題
