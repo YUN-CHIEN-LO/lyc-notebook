@@ -111,7 +111,7 @@ export default defineComponent({
   &--fix {
     position: sticky;
     top: 0;
-    z-index: 2000;
+    z-index: 1000;
     border-radius: 0;
     padding: s-unit(1);
 

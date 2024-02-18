@@ -39,8 +39,11 @@ export default defineComponent({
 
   },
   setup(props) {
+    const fontSize = getComputedStyle(document.documentElement)
+      .getPropertyValue('--font-size');
+
     // 字體大小
-    const size = computed(() => `${(props.fontSize ?? 3) * 8 + 12}px`);
+    const size = computed(() => `${(props.fontSize) * Number(fontSize)}px`);
     // svg d
     const d = computed(() => {
       switch (props.icon) {
