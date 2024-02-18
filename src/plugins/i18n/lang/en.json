@@ -49,5 +49,8 @@
   },
   "tutor": {
     "title": "Tutoring Resources"
+  },
+  "notebook": {
+    "title": "All Notes"
   }
 }
