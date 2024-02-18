@@ -2,14 +2,14 @@
   <lyc-card
     :color="color ?? 'default'"
     :clickable="clickable"
-    :class="['home-panel', { 'home-panel--fix': fix }]"
+    :class="['home-panel']"
     @click="handleClick"
   >
     <h1 class="home-panel__title"> {{ t(`${title ?? `${String(route.name)}.title`}`) }} </h1>
     <LycIcon
       class="home-panel__icon"
       :icon="icon ?? route.meta.icon"
-      :font-size="fix ? 2 : 8"
+      :font-size="6"
     />
   </lyc-card>
 </template>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { useRouter, useRoute } from 'vue-router';
 import type { PropType } from 'vue';
-import { computed, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import useLayoutStore from '@/stores/layout';
 import { useI18n } from 'vue-i18n';
 
@@ -68,12 +68,9 @@ export default defineComponent({
       router.push({ name: props.name ?? route.name });
     }
 
-    const fix = computed(() => props.scrollFix);
-
     return {
       t,
       route,
-      fix,
       handleClick, // 當 點擊面板
     };
   },
@@ -108,18 +105,5 @@ export default defineComponent({
     margin-right: s-unit(4);
   }
 
-  &--fix {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-radius: 0;
-    padding: s-unit(1);
-
-    &>.home-panel__title {
-      font-size: $base-font ;
-      margin: 0;
-      margin-left: s-unit(2);
-    }
-  }
 }
 </style>
