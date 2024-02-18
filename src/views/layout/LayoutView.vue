@@ -65,9 +65,9 @@
         </aside>
       </transition>
       <main class="lyc-main">
-        <router-view v-slot="{ Component, }">
+        <router-view v-slot="{ Component }">
           <transition
-            name="fade"
+            name="route"
             mode="out-in"
           >
             <component :is="Component" />
@@ -216,15 +216,5 @@ onBeforeUnmount(() => {
 .sidebar-enter-to,
 .sidebar-leave-from {
   width: 360px;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

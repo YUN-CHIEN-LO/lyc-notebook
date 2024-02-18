@@ -5,7 +5,14 @@
         <RoutePanel color="primary" />
       </lyc-column>
     </lyc-row>
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+      <transition
+        name="route"
+        mode="out-in"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 

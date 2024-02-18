@@ -31,7 +31,7 @@ body {
     box-shadow: inset 0 0 0 1000px var(--white);
   }
   h1 {
-    font-size: fz(10);
+    font-size: fz(8);
   }
 
   .lyc-tooltip {
@@ -88,4 +88,14 @@ body {
       padding: 0 s-unit(10);
     }
   }
+}
+
+.route-enter-active,
+.route-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
 }

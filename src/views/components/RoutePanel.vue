@@ -83,6 +83,7 @@ export default defineComponent({
 
   &__title {
     margin-left: s-unit(4);
+    margin-right: s-unit(2);
     flex: 1;
     overflow-wrap: break-word;
     word-wrap: break-word;

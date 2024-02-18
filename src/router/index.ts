@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory as createWebHistory } from 'vue-router';
 import lg from '@/plugins/local-storage';
 import { StorageBool, StorageEnum } from '@/types';
 import useLayoutStore from '@/stores/layout';
