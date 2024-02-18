@@ -14,7 +14,7 @@
 import {
   defineComponent, onBeforeMount, reactive,
 } from 'vue';
-import { useRouter, useRoute, RouteRecordName } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
@@ -24,7 +24,7 @@ export default defineComponent({
      *
      */
     function getAllFiles(): string[] {
-      const files = import.meta.glob('@/assets/notebook/*.md');
+      const files = import.meta.glob('@/assets/markdown/*.md');
       return Object.keys(files).map((path) => {
         const pathSplit = path.split('/');
         const fileName = pathSplit[pathSplit.length - 1].split('.md')[0];

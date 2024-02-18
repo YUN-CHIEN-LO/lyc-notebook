@@ -5,6 +5,7 @@ import {
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+
 /**
  * 插入 scss 全域檔案
  * @param {string} content - 檔案內容

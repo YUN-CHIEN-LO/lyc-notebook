@@ -27,7 +27,6 @@ export default defineStore('user', {
   actions: {
     setUser(updates = {}) {
       const currentUser = api.user.getCurrentUser();
-      console.log('currentUser', currentUser);
       this.user = {
         email: currentUser?.email,
         isAnonymous: currentUser?.isAnonymous,
@@ -41,7 +40,6 @@ export default defineStore('user', {
      */
     setUserCredential(user: (Firebase.UserCredential | null)) {
       this.userCredential = user;
-      console.log('設置使用者憑證', StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
       lg.set(StorageEnum.LOGIN, user ? StorageBool.true : StorageBool.false);
     },
     /**
@@ -71,8 +69,7 @@ export default defineStore('user', {
       this.setUserCredential(null);
     },
     async updateUser(updates: Firebase.UserInfoInterface) {
-      const result = await api.user.updateUser(updates);
-      console.log(updates, result);
+      // const result = await api.user.updateUser(updates);
       this.setUser(updates);
     },
   },

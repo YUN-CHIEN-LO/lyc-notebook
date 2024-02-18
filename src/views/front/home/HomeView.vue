@@ -26,7 +26,7 @@
       >
         <RoutePanel
           :color="isNotebookRoute(route.name) ? 'primary' : 'secondary'"
-          :name="route.name"
+          :name="`${route.name}.title`"
           :icon="route.meta?.icon"
           clickable
         />

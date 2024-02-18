@@ -5,7 +5,7 @@
     class="home-panel"
     @click="handleClick"
   >
-    <h1 class="home-panel__title"> {{ t(`${name ?? route.name}.title`) }} </h1>
+    <h1 class="home-panel__title"> {{ t(`${name ?? `${String(route.name)}.title`}`) }} </h1>
     <LycIcon
       class="home-panel__icon"
       :icon="icon ?? route.meta.icon"
@@ -55,6 +55,7 @@ export default defineComponent({
      * 當 點擊面板
      */
     function handleClick() {
+      if (!props.clickable) return;
       if (!layoutStore.getIsMobile) layoutStore.setShowSidebar(true);
       router.push({ name: props.name ?? route.name });
     }
