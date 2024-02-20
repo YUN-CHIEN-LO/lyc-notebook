@@ -1,5 +1,8 @@
 <template>
-  <div v-html="markdownContent"></div>
+  <div
+    class="lyc-markdown"
+    v-html="markdownContent"
+  ></div>
 </template>
 
 <script setup lang="ts">
@@ -16,6 +19,10 @@ const route = useRoute();
 const markdownContent = ref('');
 const pageTitle = ref('' as string);
 const pageIcon = ref('' as string);
+const regex = /\[(.*?)\/\/\/(.*?)\]\s+$/;
+// Regular expression to match Markdown tables
+const tableRegex = /(?:\n|^)(\|.*(?:\|.*\|)+\s*\n(?:(?:[-:|]*\|)+\s*\n)*(?:\|.*\|\s*\n)+)(?=\n(?:\||\d+\.|-|#|>|\*|`|\[|$))/g;
+const tableRegexSpaceRegex = /(?<=\|)\n\n+(?=\|)/g;
 
 const fetchMarkdownContent = async (filePath: string): Promise<string> => {
   try {
@@ -35,7 +42,7 @@ const emit = defineEmits(['load']);
 const renderFile = async () => {
   try {
     const markdownFile = await fetchMarkdownContent(`src/assets/markdown/${route.params.filename}.md`);
-    const regex = /\[(.*?)\/\/\/(.*?)\]\s+$/;
+
     const match = regex.exec(markdownFile);
     if (match) {
       const [, matchedPageTitle, matchedPageIcon] = match;
@@ -52,7 +59,15 @@ const renderFile = async () => {
       });
     }
 
-    const markdownText = markdownFile.replace(regex, '');
+    const markdownText = markdownFile
+      .replace(regex, '')
+      .replace(tableRegex, '\n\n<div class="lyc-table">\n\n$1\n</div>\n\n')
+      .split(tableRegexSpaceRegex).join('\n\n</div>\n\n<div class="lyc-table">\n\n');
+
+    // .replace(tableRegex, (matched, p1) => `\n<div class="lyc-table">\n\n${p1}</div>\n\n`);
+
+    console.log(markdownText);
+
     markdownContent.value = md.render(markdownText);
   } catch (error) {
     markdownContent.value = `Error loading Markdown file: ${route.params.filename}`;
@@ -66,4 +81,8 @@ watch(() => route.params.filename, () => {
 renderFile(); // Initial render when component is mounted
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.lyc-markdown {
+  padding: 0px s-unit(2);
+}
+</style>

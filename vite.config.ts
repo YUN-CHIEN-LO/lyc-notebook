@@ -21,8 +21,10 @@ function setScssAdditionalData(content: string, filePath: string) {
   // 全域 scss 檔案路徑
   const globalScss = '@import "@/styles/_global.scss";';
 
+  const libStyle = '@import "@/styles/_lycui.scss";';
+
   // 在每個檔案前綴全域變數
-  return useSassMap + globalScss + content;
+  return useSassMap + globalScss + libStyle + content;
 }
 
 // https://vitejs.dev/config/

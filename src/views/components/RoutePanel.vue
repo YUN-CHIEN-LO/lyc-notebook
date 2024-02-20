@@ -9,7 +9,7 @@
     <LycIcon
       class="home-panel__icon"
       :icon="icon ?? route.meta.icon"
-      :font-size="6"
+      :font-size="5"
     />
   </lyc-card>
 </template>
@@ -92,8 +92,7 @@ export default defineComponent({
   }
 
   &__title {
-    margin-left: s-unit(4);
-    margin-right: s-unit(2);
+    margin: 0;
     flex: 1;
     overflow-wrap: break-word;
     word-wrap: break-word;

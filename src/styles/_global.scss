@@ -2,8 +2,8 @@
 @use "sass:color";
 @import "./mixins";
 @import "./themes.module";
-@import "./extends";
 @import "./function";
+@import "./extends";
 
 @mixin theme($theme) {
   @each $name

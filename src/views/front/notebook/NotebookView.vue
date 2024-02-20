@@ -55,7 +55,9 @@ function handleLoad(pageInfo: { title: string; icon: string }) {
  */
 function handleClick() {
   if (isPage.value) {
-    layoutStore.setShowPageList(!layoutStore.showPageList);
+    const show = !layoutStore.showPageList;
+    layoutStore.setShowPageList(show);
+    layoutStore.setShowSidebar(show);
   }
 }
 

@@ -4,17 +4,16 @@
     :data-theme="layoutStore.getTheme"
   >
     <lyc-navbar>
-      {{ layoutStore.getIsDesktop }}/{{ layoutStore.getIsMobile }}
       <LycIconButton
         icon="lycLogo"
         @click="handleToggleSidebar"
       />
-      <p
+      <span
         v-show="!layoutStore.getIsMobile"
         class="my-g-0 mx-s-2"
       >
         {{ t("system.projectName") }} | {{ t(routeTitle) }}
-      </p>
+      </span>
       <template #tools>
         <!-- 進入後台 -->
         <LycIconButton
@@ -69,8 +68,8 @@
         </aside>
       </transition>
       <main :class="['lyc-main', {
-        'ml-g-4': !showSidebar && !layoutStore.getIsMobile,
-        'mr-g-4': !showPageList && !layoutStore.getIsMobile
+        'pl-g-4': !showSidebar && !layoutStore.getIsMobile,
+        'pr-g-4': !showPageList && !layoutStore.getIsMobile
       }]">
         <router-view v-slot="{ Component }">
           <transition
@@ -189,8 +188,9 @@ function handleMoreDrawer() {
 }
 
 watch(() => layoutStore.getIsDesktop, (value: boolean): void => {
-  console.log('xxx', value);
-  if (!value) layoutStore.setShowSidebar(false);
+  if (value) return;
+  layoutStore.setShowSidebar(false);
+  layoutStore.setShowPageList(false);
 });
 
 onMounted(() => {

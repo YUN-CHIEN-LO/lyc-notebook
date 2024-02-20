@@ -9,83 +9,146 @@ body {
   overflow: hidden;
   font-family: "Noto Sans TC", "Roboto", sans-serif;
   background-color: color(backdrop);
-}
 
-#lyc-app {
-  background-color: color(backdrop);
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box;
-  font-size: $font-size;
-  color: color(dark);
-  line-height: 1.5;
-  letter-spacing: 1px;
-  @include flex($fd: column, $fw: nowrap, $ai: stretch);
-
-  input:focus,
-  textarea:focus,
-  select:focus,
-  a:focus {
-    outline: none;
-    -webkit-text-fill-color: var(--dark);
-    box-shadow: inset 0 0 0 1000px var(--white);
-  }
   h1 {
-    font-size: fz(8);
+    font-size: fz(6);
+    margin: s-unit(3) 0px;
+  }
+  h2 {
+    font-size: fz(5.5);
+    margin: s-unit(2.5) 0px;
+  }
+  h3 {
+    font-size: fz(4);
+    margin: s-unit(2.5) 0px;
+  }
+  h4,
+  h5,
+  h6 {
+    font-size: fz(4.5);
+    margin: s-unit(2.5) 0px;
   }
 
-  .lyc-tooltip {
-    position: fixed;
-    color: $color-font-inverse;
-    background-color: color(dark, 3);
-    border-radius: s-unit(1);
-    font-size: fz(3);
-    opacity: 0;
-    visibility: hidden;
-    padding: s-unit(0.5) s-unit(2);
-    margin: s-unit(1);
-    text-align: center;
-    transform: translateX(-50%);
-    @include transitions(opacity 0.1s linear);
-    @include utils-user-select(none);
-
-    &--hover {
-      visibility: visible;
-      opacity: 1;
-    }
+  p {
+    font-size: fz(4);
+    margin: s-unit(2) 0px;
   }
 
-  .lyc-container {
-    width: 100%;
-    height: calc(100% - $navbar-height);
+  #lyc-app {
+    background-color: color(backdrop);
+    height: 100vh;
+    overflow: hidden;
     box-sizing: border-box;
-    @include small-device {
-      min-width: 300px;
+    font-size: $font-size;
+    color: color(dark);
+    line-height: 1.5;
+    letter-spacing: 1px;
+    @include flex($fd: column, $fw: nowrap, $ai: stretch);
+
+    input:focus,
+    textarea:focus,
+    select:focus,
+    a:focus {
+      outline: none;
+      -webkit-text-fill-color: var(--dark);
+      box-shadow: inset 0 0 0 1000px var(--white);
     }
 
-    @include medium-device {
-      min-width: 768px;
+    blockquote {
+      border-left: s-unit(1) solid color(text);
+      margin: 0;
+      padding-left: s-unit(4);
     }
 
-    @include large-device {
-      min-width: 992px;
+    a {
+      color: color(primary, 6);
+    }
+
+    pre {
+      background-color: color(text, 2);
+      padding: s-unit(4);
+      border-radius: s-unit(2);
+      margin: s-unit(3) 0px;
+    }
+
+    .lyc-table {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      overflow-x: auto;
+      margin: s-unit(3) 0px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      thead {
+        background-color: color(primary);
+        color: $color-font-inverse;
+      }
+      th,
+      td {
+        font-size: fz(4);
+        padding: s-unit(1.5);
+        min-width: 200px;
+      }
+      tbody > tr:nth-child(even) {
+        background-color: color(primary, 1);
+      }
+    }
+
+    .lyc-tooltip {
+      position: fixed;
+      color: $color-font-inverse;
+      background-color: color(dark, 3);
+      border-radius: s-unit(1);
+      font-size: fz(3);
+      opacity: 0;
+      visibility: hidden;
+      padding: s-unit(0.5) s-unit(2);
+      margin: s-unit(1);
+      text-align: center;
+      transform: translateX(-50%);
+      @include transitions(opacity 0.1s linear);
+      @include utils-user-select(none);
+
+      &--hover {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .lyc-container {
+      width: 100%;
+      height: calc(100% - $navbar-height);
+      box-sizing: border-box;
+      @include small-device {
+        min-width: 300px;
+      }
+
+      @include medium-device {
+        min-width: 768px;
+      }
+
+      @include large-device {
+        min-width: 992px;
+      }
+    }
+
+    .lyc-main {
+      flex: 1;
+      overflow: auto;
+      align-self: stretch;
+      padding: 0 s-unit(2);
     }
   }
 
-  .lyc-main {
-    flex: 1;
-    overflow: auto;
-    align-self: stretch;
-    padding: 0 s-unit(2);
+  .route-enter-active,
+  .route-leave-active {
+    transition: opacity 0.3s ease-in-out;
   }
-}
 
-.route-enter-active,
-.route-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-
-.route-enter-from,
-.route-leave-to {
-  opacity: 0;
+  .route-enter-from,
+  .route-leave-to {
+    opacity: 0;
+  }
 }

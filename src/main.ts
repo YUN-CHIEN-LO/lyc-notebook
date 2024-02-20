@@ -5,7 +5,6 @@ import pinia from '@/plugins/pinia';
 import i18n from '@/plugins/i18n';
 import firebaseApp from '@/plugins/firebase';
 import App from '@/App.vue';
-import '@/styles/_lycui.scss';
 import register from '@/components/global-register';
 
 const app = createApp(App);

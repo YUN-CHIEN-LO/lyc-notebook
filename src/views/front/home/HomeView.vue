@@ -11,7 +11,7 @@
         <LycIcon
           icon="lycLogo"
           class="c-primary"
-          :font-size="20"
+          :font-size="10"
         />
         <h1 class="c-primary"> {{ t('system.projectName') }} </h1>
       </lyc-column>
@@ -82,11 +82,11 @@ function isNotebookRoute(name: RouteRecordName): boolean {
     }
 
     &>h1 {
-      font-size: fz(20) !important;
+      font-size: fz(10) !important;
       line-height: 0;
 
       @include small-device {
-        font-size: fz(10);
+        font-size: fz(8);
         width: 100%;
         text-align: center;
         line-height: 1.2;

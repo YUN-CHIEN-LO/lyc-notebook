@@ -45,7 +45,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .lyc-card {
-  padding: s-unit(2);
+  padding: s-unit(4);
   border-radius: s-unit(4);
   border: solid s-unit(1);
   background-color: color(backdrop);

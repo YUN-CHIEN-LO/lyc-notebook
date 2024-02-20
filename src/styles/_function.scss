@@ -25,9 +25,9 @@ $base-font: 12;
 
 @include large-device {
   :root {
-    --padding-unit: 8;
-    --margin-unit: 8;
-    --font-size: 10;
+    --padding-unit: 6;
+    --margin-unit: 6;
+    --font-size: 8;
   }
 }
 
